@@ -45,7 +45,7 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
           <div className="control">
             <button className={classNames("button", "is-info")}>
               Continue
-              </button>
+            </button>
           </div>
         </div>
       </form>

@@ -1,5 +1,7 @@
 import * as React from "react";
-import { string } from "prop-types";
+import { useState } from "react";
+
+import RatingScale from "./rating_scale";
 
 interface VideoStep {
   type: "video";
@@ -22,11 +24,38 @@ interface ExperimentProps {
 }
 
 const Experiment: React.FC<ExperimentProps> = (props) => {
-  const { steps } = props;
+  const [steps, setSteps] = useState<Array<ExperimentStep>>(props.steps);
 
-  return (
-    <div>Loaded experiment: {steps.toString()}</div>
-  );
+  const gotoNextStep = () => {
+    steps.shift();
+
+    if (steps.length === 0) {
+      props.closeSession();
+    } else {
+      setSteps([...steps]);
+    }
+  };
+
+  const [currentStep] = steps;
+
+  if (currentStep) {
+    switch (currentStep.type) {
+      case "scale":
+        return (
+          <RatingScale
+            question={currentStep.question}
+            min={currentStep.min}
+            max={currentStep.max}
+            labels={currentStep.labels}
+            onContinue={gotoNextStep}
+          />
+        );
+      default:
+        return null;
+    }
+  }
+
+  return null;
 };
 
 export default Experiment;
