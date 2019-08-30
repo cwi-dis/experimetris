@@ -33,7 +33,7 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
 
   return (
     <div>
-      <form className="column" onSubmit={parseFormData}>
+      <form id="uploadform" onSubmit={parseFormData}>
         <div className="field">
           <label className="label">File</label>
           <div className="control">

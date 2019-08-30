@@ -15,3 +15,12 @@ html, body {
   background-color: #212121;
   -webkit-app-region: drag;
 }
+
+#uploadform {
+  width: 50vw;
+  margin: 15% auto;
+}
+
+#uploadform label {
+  color: #B1B1B1;
+}
