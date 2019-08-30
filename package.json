@@ -1,0 +1,45 @@
+{
+  "name": "tetris-study",
+  "productName": "Tetris",
+  "version": "1.0.0",
+  "description": "An Electron application to run cognitive load studies using a version of Tetris",
+  "main": "main.js",
+  "repository": "https://github.com/troeggla/tetris-study",
+  "author": "Thomas Röggla",
+  "license": "BSD-2-Clause",
+  "scripts": {
+    "start": "electron main.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "nl.cwi.dis.tetris-study",
+    "mac": {
+      "target": "dir"
+    },
+    "win": {
+      "target": "portable"
+    }
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "classnames": "^2.2.6",
+    "css-loader": "^2.1.1",
+    "electron": "^6.0.6",
+    "electron-builder": "^21.2.0",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.0.4",
+    "tslint": "^5.19.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.6.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
