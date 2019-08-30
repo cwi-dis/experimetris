@@ -23,7 +23,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
   const { steps } = props;
 
   return (
-    <div>Loaded experiment: {steps}</div>
+    <div>Loaded experiment: {steps.toString()}</div>
   );
 };
 
