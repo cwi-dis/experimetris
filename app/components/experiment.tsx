@@ -2,10 +2,12 @@ import * as React from "react";
 import { useState } from "react";
 
 import RatingScale from "./rating_scale";
+import EmbeddedVideo from "./embedded_video";
 
 interface VideoStep {
   type: "video";
   url: string;
+  autoplay: boolean;
 }
 
 interface ScaleStep {
@@ -48,6 +50,13 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
             max={currentStep.max}
             labels={currentStep.labels}
             onContinue={gotoNextStep}
+          />
+        );
+      case "video":
+        return (
+          <EmbeddedVideo
+            url={currentStep.url}
+            autoplay={currentStep.autoplay}
           />
         );
       default:
