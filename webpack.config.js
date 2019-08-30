@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./app/main.tsx",
+  entry: "./app/main.ts",
   mode: "development",
   target: "electron-renderer",
   output: {

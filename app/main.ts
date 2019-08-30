@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement } from "react";
 import { render } from "react-dom";
 
 import App from "./components/app";
@@ -8,7 +8,7 @@ import "./css/style.css";
 
 window.onload = () => {
   render(
-    <App />,
+    createElement(App),
     document.getElementById("react")
   );
 };
