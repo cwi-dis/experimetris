@@ -1,12 +1,14 @@
 import * as React from "react";
 import { render } from "react-dom";
 
+import App from "./components/app";
+
 import "bulma/css/bulma.css";
 import "./css/style.css";
 
 window.onload = () => {
   render(
-    <div>Hello World</div>,
+    <App />,
     document.getElementById("react")
   );
 };
