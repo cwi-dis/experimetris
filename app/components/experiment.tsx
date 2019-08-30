@@ -11,12 +11,14 @@ interface ScaleStep {
   question: string;
   min: number;
   max: number;
+  labels: [string, string];
 }
 
 export type ExperimentStep = VideoStep | ScaleStep;
 
 interface ExperimentProps {
   steps: Array<ExperimentStep>;
+  closeSession: () => void;
 }
 
 const Experiment: React.FC<ExperimentProps> = (props) => {
