@@ -1,12 +1,13 @@
 import * as React from "react";
 
 interface EmbeddedVideoProps {
-  url: string;
+  videoId: string;
   autoplay: boolean;
+  onContinue: () => void;
 }
 
 const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
-  const { url, autoplay } = props;
+  const { videoId, autoplay } = props;
   const embedUrl = url.replace("watch?v=", "embed/") + ((autoplay) ? "?autoplay=1" : "");
   console.log("embedurl:", embedUrl);
 

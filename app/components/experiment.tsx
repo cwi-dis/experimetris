@@ -6,7 +6,7 @@ import EmbeddedVideo from "./embedded_video";
 
 interface VideoStep {
   type: "video";
-  url: string;
+  videoId: string;
   autoplay: boolean;
 }
 
@@ -55,8 +55,9 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
       case "video":
         return (
           <EmbeddedVideo
-            url={currentStep.url}
+            videoId={currentStep.videoId}
             autoplay={currentStep.autoplay}
+            onContinue={gotoNextStep}
           />
         );
       default:
