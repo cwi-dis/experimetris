@@ -13,7 +13,6 @@
   "include": [
     "./app/**/*.tsx",
     "./app/**/*.ts",
-    "./@types/**/*.ts"
   ],
   "exclude": [
     "./node_modules/**/*"
