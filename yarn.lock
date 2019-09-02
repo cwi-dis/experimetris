@@ -2410,6 +2410,11 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
+load-script2@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/load-script2/-/load-script2-2.0.2.tgz#e0176f861797477beeedcdc28892b913b84df2e8"
+  integrity sha512-jhu5PuWP4xZopugGlDTipmM71w4ObKGCGtfgojORqDQeFNEd3+EhaW8rqXWqZ7S2w+I7ZgrLN1x9CWjwbs2jug==
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -4640,3 +4645,10 @@ yauzl@2.4.1:
   integrity sha1-lSj0QtqxsihOWLQ3m7GU4i4MQAU=
   dependencies:
     fd-slicer "~1.0.1"
+
+yt-player@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/yt-player/-/yt-player-3.3.0.tgz#dd5f992c598ce8cc4a04332ef487463218e0eeaf"
+  integrity sha512-ZU7DK/jhaypNkkhTrdgaf6+5Lehu3//6iUfP+mx61liNGfdYP08U0oluc63qrC7NNMPUaArwi5qyYatzOwgk1Q==
+  dependencies:
+    load-script2 "^2.0.1"
