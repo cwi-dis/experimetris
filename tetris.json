@@ -1,0 +1,21 @@
+[
+  {
+    "type": "scale",
+    "min": 1,
+    "max": 9,
+    "question": "What do you think?",
+    "labels": ["don't care", "do care"]
+  },
+  {
+    "type": "video",
+    "videoId": "MPJ0AB12h1I",
+    "autoplay": true
+  },
+  {
+    "type": "scale",
+    "min": 3,
+    "max": 9,
+    "question": "What do you think about that other thing?",
+    "labels": ["meh", "yay"]
+  }
+]
