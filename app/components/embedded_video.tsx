@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useEffect, useRef } from "react";
+import YouTubePlayer = require("yt-player");
 
 interface EmbeddedVideoProps {
   videoId: string;
@@ -7,13 +9,35 @@ interface EmbeddedVideoProps {
 }
 
 const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
-  const { videoId, autoplay } = props;
-  const embedUrl = url.replace("watch?v=", "embed/") + ((autoplay) ? "?autoplay=1" : "");
-  console.log("embedurl:", embedUrl);
+  const { videoId, autoplay, onContinue } = props;
+  const videoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!videoRef) {
+      console.error("Video ref not available");
+      return;
+    }
+
+    console.log(window.innerWidth, window.innerHeight);
+
+    const player = new YouTubePlayer(videoRef.current!, {
+      width: window.innerWidth,
+      height: window.innerHeight - 24,
+      modestBranding: true
+    });
+
+    player.load(videoId, autoplay);
+    player.setVolume(100);
+
+    player.on("ended", () => {
+      console.log("Video playback ended");
+      onContinue();
+    });
+  }, [videoId]);
 
   return (
     <div>
-      <iframe style={{ width: "100%", height: "calc(100vh - 24px)" }} src={embedUrl} />
+      <div ref={videoRef} />
     </div>
   );
 };

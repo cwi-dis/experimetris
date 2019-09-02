@@ -3,7 +3,7 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./app/main.ts",
   mode: "development",
-  target: "electron-renderer",
+  target: "web",
   output: {
     path: __dirname + "/js",
     filename: "bundle.js"
