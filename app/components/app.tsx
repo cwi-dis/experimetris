@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <div>
       {(experiment.length === 0)
         ? <ExperimentLoader onDataLoaded={setExperiment} />
-        : <Experiment steps={experiment} closeSession={() => alert("Experiment done!")} />
+        : <Experiment steps={experiment} closeSession={() => setExperiment([])} />
       }
     </div>
   );
