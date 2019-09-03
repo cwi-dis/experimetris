@@ -19,7 +19,9 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
 
   return (
     <div className="question-container">
-      <h3>{question}</h3>
+      <h4 className="title is-4" style={{color: "#E2E2E2"}}>
+        {question}
+      </h4>
 
       <Scale
         min={min}
