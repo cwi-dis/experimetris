@@ -18,7 +18,7 @@ const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
       return;
     }
 
-    console.log(window.innerWidth, window.innerHeight);
+    console.log("Loading video", videoId);
 
     const player = new YouTubePlayer(videoRef.current!, {
       width: window.innerWidth,
@@ -33,6 +33,10 @@ const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
       console.log("Video playback ended");
       onContinue();
     });
+
+    return () => {
+      player.destroy();
+    };
   }, [videoId]);
 
   return (
