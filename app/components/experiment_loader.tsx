@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import * as classNames from "classnames";
 
 import { ExperimentStep } from "./experiment";
@@ -8,15 +9,14 @@ interface ExperimentLoaderProps {
 }
 
 const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
+  const [dropzoneEntered, setDropzoneEntered] = useState(false);
   const { onDataLoaded } = props;
 
-  const parseFormData = (e: React.FormEvent<HTMLFormElement>) => {
+  const parseFormData = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
+    console.log("File dropped");
 
-    const fileInput = e.currentTarget.elements[0] as HTMLInputElement;
-    const file = fileInput.files!.item(0)!;
-
+    const file = e.dataTransfer.files.item(0)!;
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
@@ -33,22 +33,15 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
 
   return (
     <div>
-      <form id="uploadform" onSubmit={parseFormData}>
-        <div className="field">
-          <label className="label">File</label>
-          <div className="control">
-            <input key="upload" className="input is-info" required={true} type="file" placeholder="File" />
-          </div>
-        </div>
-
-        <div className="field" style={{ marginTop: 25 }}>
-          <div className="control">
-            <button className={classNames("button", "is-info")}>
-              Continue
-            </button>
-          </div>
-        </div>
-      </form>
+      <div
+        className={classNames("dropzone", { "dropzone-entered": dropzoneEntered })}
+        onDragEnter={() => setDropzoneEntered(true)}
+        onDragLeave={() => setDropzoneEntered(false)}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={parseFormData}
+      >
+        Drop a file here
+      </div>
     </div>
   );
 };

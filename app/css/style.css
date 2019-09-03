@@ -16,11 +16,26 @@ html, body {
   -webkit-app-region: drag;
 }
 
-#uploadform, .question-container {
+.question-container {
   width: 50vw;
   margin: 15% auto;
 }
 
-#uploadform label {
-  color: #B1B1B1;
+.dropzone {
+  width: 50vw;
+  height: 50vh;
+
+  border: 5px dashed #333333;
+  border-radius: 15px;
+  margin: 20vh auto 0 auto;
+
+  font-size: 30px;
+  color: #999999;
+  text-align: center;
+  padding-top: 20vh;
+}
+
+.dropzone-entered {
+  border: 5px dashed #555555;
+  color: #E2E2E2;
 }
