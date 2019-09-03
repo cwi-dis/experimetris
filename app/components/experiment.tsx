@@ -8,6 +8,7 @@ interface VideoStep {
   type: "video";
   videoId: string;
   autoplay: boolean;
+  stopAfter?: number;
 }
 
 interface ScaleStep {
@@ -57,6 +58,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
           <EmbeddedVideo
             videoId={currentStep.videoId}
             autoplay={currentStep.autoplay}
+            stopAfter={currentStep.stopAfter}
             onContinue={gotoNextStep}
           />
         );
