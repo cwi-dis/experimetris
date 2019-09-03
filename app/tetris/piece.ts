@@ -23,3 +23,10 @@ class Piece {
     return this.color;
   }
 }
+
+export function getRandomPiece() {
+  const i = Math.floor(Math.random() * PIECES.length);
+  const [shape, color] = PIECES[i];
+
+  return new Piece(shape, color);
+}
