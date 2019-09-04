@@ -177,11 +177,11 @@ export const Z: Tetromino = [
 ];
 
 export const PIECES: Array<[string, Tetromino, string]> = [
-  ["S", S, "red"],
-  ["Z", Z, "green"],
-  ["I", I, "yellow"],
-  ["O", O, "blue"],
-  ["T", T, "purple"],
-  ["L", L, "cyan"],
-  ["J", J, "orange"]
+  ["S", S, "rgb(81, 145, 105)"],
+  ["Z", Z, "rgb(4, 160, 56)"],
+  ["I", I, "rgb(252, 44, 68)"],
+  ["O", O, "rgb(186, 131, 126)"],
+  ["T", T, "rgb(183, 117, 41)"],
+  ["L", L, "rgb(180, 31, 68)"],
+  ["J", J, "rgb(41, 140, 192)"]
 ];
