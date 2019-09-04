@@ -1,7 +1,7 @@
 {
   "name": "tetris-study",
   "productName": "Tetris",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Electron application to run cognitive load studies using a version of Tetris",
   "main": "main.js",
   "repository": "https://github.com/troeggla/tetris-study",
