@@ -21,9 +21,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     const canvas = canvasRef.current!;
     const board = new Board(canvas, 30, [10, 20]);
 
-    const gameTick = setInterval(() => {
-      board.tick();
-    }, 200);
+    runGame(board, mapDifficulty(difficulty));
 
     board.once("gameover", (rowsFilled: number) => {
       console.log("Game ended with score:", rowsFilled);

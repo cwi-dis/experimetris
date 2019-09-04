@@ -1,8 +1,30 @@
 import Piece from "./piece";
-import { PIECES, Tetromino } from "./tetromino";
+import { PIECES } from "./tetromino";
 import { EventEmitter } from "events";
 
 export const EMPTY = "transparent";
+
+export function runGame(board: Board, tickLength = 200) {
+  let gameOver = false;
+  let lastTick = Date.now();
+
+  board.once("gameover", () => gameOver = true);
+
+  const run = () => {
+    if (Date.now() - lastTick > tickLength) {
+      lastTick = Date.now();
+      board.tick();
+    }
+
+    if (!gameOver) {
+      requestAnimationFrame(run);
+    } else {
+      console.log("requestAnimationFrame cancelled");
+    }
+  };
+
+  run();
+}
 
 export class Board extends EventEmitter {
   private readonly SQAURESIZE: number;
