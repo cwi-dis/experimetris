@@ -28,6 +28,14 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       onContinue();
     });
 
+    board.on("pieceGenerated", (name: string) => {
+      console.log("New piece generated:", name);
+    });
+
+    board.on("rowCompleted", () => {
+      console.log("New row completed");
+    });
+
     return () => {
       clearInterval(gameTick);
     };

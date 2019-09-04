@@ -73,13 +73,14 @@ export class Board extends EventEmitter {
 
   private getRandomPiece() {
     const i = Math.floor(Math.random() * PIECES.length);
-    const [shape, color] = PIECES[i];
+    const [name, shape, color] = PIECES[i];
 
     const initialPosition: [number, number] = [
       Math.floor(this.DIMENSIONS[0] / 2) - 2,
       -2
     ];
 
+    this.emit("pieceGenerated", name);
     return new Piece(this, shape, color, initialPosition);
   }
 
@@ -137,10 +138,9 @@ export class Board extends EventEmitter {
         }
 
         this.rowsFilled += 1;
+        this.emit("rowCompleted");
       }
     }
-
-
   }
 
   private draw() {
