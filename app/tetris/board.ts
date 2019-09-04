@@ -35,6 +35,7 @@ export class Board extends EventEmitter {
   private rowsFilled: number = 0;
   private gameOver: boolean = false;
 
+  private generatedPieces: Array<string> = [];
   private currentPiece?: Piece;
 
   constructor(canvas: HTMLCanvasElement, squareSize = 20, dimensions: [number, number] = [10, 20]) {
@@ -102,7 +103,9 @@ export class Board extends EventEmitter {
       -2
     ];
 
+    this.generatedPieces.push(name);
     this.emit("pieceGenerated", name);
+
     return new Piece(this, shape, color, initialPosition);
   }
 
@@ -198,7 +201,7 @@ export class Board extends EventEmitter {
 
   public tick() {
     if (this.gameOver) {
-      this.emit("gameover", this.rowsFilled);
+      this.emit("gameover", this.rowsFilled, this.generatedPieces);
       return;
     }
 
