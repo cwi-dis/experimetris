@@ -51,10 +51,14 @@ html, body {
   font-size: 36pt;
 }
 
-#fullscreen-message {
+#end-screen {
   text-align: center;
   font-size: 36pt;
 
-  margin-top: 40vh;
+  margin-top: 35vh;
   width: 100%;
+}
+
+#end-screen a {
+  margin-top: 20px;
 }
