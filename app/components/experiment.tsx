@@ -3,10 +3,11 @@ import { useState } from "react";
 
 import RatingScale from "./rating_scale";
 import EmbeddedVideo from "./embedded_video";
-import TetrisBoard from "./tetris_board";
+import TetrisBoard, { TetrisDifficulty } from "./tetris_board";
 
 interface TetrisStep {
   type: "tetris";
+  difficulty: TetrisDifficulty;
 }
 
 interface VideoStep {
@@ -35,6 +36,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
   const [steps, setSteps] = useState<Array<ExperimentStep>>(props.steps);
 
   const gotoNextStep = () => {
+    console.log("Loading next step");
     steps.shift();
 
     if (steps.length === 0) {
@@ -70,6 +72,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
       case "tetris":
         return (
           <TetrisBoard
+            difficulty={currentStep.difficulty}
             onContinue={gotoNextStep}
           />
         );

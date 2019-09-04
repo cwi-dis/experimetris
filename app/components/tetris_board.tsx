@@ -1,9 +1,12 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { Board } from "../tetris/board";
+import { Board, runGame } from "../tetris/board";
+
+export type TetrisDifficulty = "easy" | "normal" | "hard" | "insane";
 
 interface TetrisBoardProps {
+  difficulty: TetrisDifficulty;
   onContinue: () => void;
 }
 
@@ -11,7 +14,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
   const [score, setScore] = useState<number>(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { onContinue } = props;
+  const { difficulty, onContinue } = props;
 
   useEffect(() => {
     if (!canvasRef) {
@@ -36,10 +39,6 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       console.log("New row completed");
       setScore(rowsFilled);
     });
-
-    return () => {
-      clearInterval(gameTick);
-    };
   }, []);
 
   return (
