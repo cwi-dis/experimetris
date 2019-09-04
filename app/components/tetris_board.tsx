@@ -3,7 +3,12 @@ import { useEffect, useRef } from "react";
 
 import { Board } from "../tetris/board";
 
-const TetrisBoard: React.FC = () => {
+interface TetrisBoardProps {
+  onContinue: () => void;
+}
+
+const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
+  const { onContinue } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -17,6 +22,11 @@ const TetrisBoard: React.FC = () => {
     const gameTick = setInterval(() => {
       board.tick();
     }, 200);
+
+    board.once("gameover", (rowsFilled: number) => {
+      console.log("Game ended with score:", rowsFilled);
+      onContinue();
+    });
 
     return () => {
       clearInterval(gameTick);

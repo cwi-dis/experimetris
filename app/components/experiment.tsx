@@ -69,7 +69,9 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
         );
       case "tetris":
         return (
-          <TetrisBoard />
+          <TetrisBoard
+            onContinue={gotoNextStep}
+          />
         );
       default:
         return null;
