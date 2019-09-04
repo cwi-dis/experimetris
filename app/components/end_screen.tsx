@@ -10,7 +10,7 @@ const EndScreen: React.FC<EndScreenProps> = (props) => {
   const data = "data:application/json;base64," + btoa(JSON.stringify(downloadableData));
 
   return (
-    <div id="fullscreen-message">
+    <div id="end-screen">
       <h2 className="centered">
         {message}
       </h2>

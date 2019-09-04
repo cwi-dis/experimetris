@@ -3,22 +3,23 @@ import { useState } from "react";
 
 import ExperimentLoader from "./experiment_loader";
 import Experiment, { ExperimentStep } from "./experiment";
-import FullscreenMessage from "./fullscreen_message";
+import EndScreen from "./end_screen";
 
 const App: React.FC = () => {
-  const [sessionClosed, setSessionClosed] = useState(false);
+  const [collectedData, setCollectedData] = useState<Array<any>>([]);
   const [experiment, setExperiment] = useState<Array<ExperimentStep>>([]);
 
   const closeSession = (collectedData: Array<any>) => {
     console.log(collectedData);
-    setSessionClosed(true);
+    setCollectedData(collectedData);
   };
 
   const renderContent = () => {
-    if (sessionClosed) {
+    if (collectedData.length > 0) {
       return (
-        <FullscreenMessage
+        <EndScreen
           message="Thank you!"
+          downloadableData={collectedData}
         />
       );
     }
