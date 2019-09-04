@@ -39,3 +39,14 @@ html, body {
   border: 5px dashed #555555;
   color: #E2E2E2;
 }
+
+.score {
+  width: 100px;
+
+  position: absolute;
+  top: 80px;
+  left: calc(50vw - 50px);
+
+  text-align: center;
+  font-size: 36pt;
+}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Board } from "../tetris/board";
 
@@ -8,8 +8,10 @@ interface TetrisBoardProps {
 }
 
 const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
-  const { onContinue } = props;
+  const [score, setScore] = useState<number>(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const { onContinue } = props;
 
   useEffect(() => {
     if (!canvasRef) {
@@ -32,17 +34,22 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       console.log("New piece generated:", name);
     });
 
-    board.on("rowCompleted", () => {
+    board.on("rowCompleted", (rowsFilled: number) => {
       console.log("New row completed");
+      setScore(rowsFilled);
     });
 
     return () => {
       clearInterval(gameTick);
     };
-  });
+  }, []);
 
   return (
     <div>
+      <div className="score">
+        {score * 10}
+      </div>
+
       <canvas
         style={{ margin: "calc(50vh - 300px) calc(50vw - 150px)" }}
         width={300}
