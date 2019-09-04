@@ -17,7 +17,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     }
 
     const canvas = canvasRef.current!;
-    const board = new Board(canvas, 30);
+    const board = new Board(canvas, 30, [10, 20]);
 
     const gameTick = setInterval(() => {
       board.tick();
@@ -43,7 +43,12 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
 
   return (
     <div>
-      <canvas width={600} height={600} ref={canvasRef} />
+      <canvas
+        style={{ margin: "calc(50vh - 300px) calc(50vw - 150px)" }}
+        width={300}
+        height={600}
+        ref={canvasRef}
+      />
     </div>
   );
 };
