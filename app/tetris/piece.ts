@@ -34,12 +34,22 @@ export default class Piece {
   }
 
   public moveDown() {
-    const [x, y] = this.position;
-
     if (this.collision(0, 1)) {
       this.locked = true;
     } else {
-      this.position = [x, y + 1];
+      this.position[1] += 1;
+    }
+  }
+
+  public moveLeft() {
+    if (!this.collision(-1, 0)) {
+      this.position[0] -= 1;
+    }
+  }
+
+  public moveRight() {
+    if (!this.collision(1, 0)) {
+      this.position[0] += 1;
     }
   }
 
@@ -52,7 +62,7 @@ export default class Piece {
   }
 
   public collision(dX: number, dY: number): boolean {
-    const currentShape = this.shape[this.rotation];
+    const currentShape = this.getShape();
     const [nextX, nextY] = [this.position[0] + dX, this.position[1] + dY];
 
     for (let y = 0; y < currentShape.length; y++) {
