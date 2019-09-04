@@ -50,3 +50,11 @@ html, body {
   text-align: center;
   font-size: 36pt;
 }
+
+#fullscreen-message {
+  text-align: center;
+  font-size: 36pt;
+
+  margin-top: 40vh;
+  width: 100%;
+}
