@@ -14,9 +14,13 @@ const TetrisBoard: React.FC = () => {
     const canvas = canvasRef.current!;
     const board = new Board(canvas, 30);
 
-    setInterval(() => {
+    const gameTick = setInterval(() => {
       board.tick();
     }, 200);
+
+    return () => {
+      clearInterval(gameTick);
+    };
   });
 
   return (
