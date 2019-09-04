@@ -1,9 +1,10 @@
 import Piece from "./piece";
 import { PIECES, Tetromino } from "./tetromino";
+import { EventEmitter } from "events";
 
 export const EMPTY = "transparent";
 
-export class Board {
+export class Board extends EventEmitter {
   private readonly SQAURESIZE: number;
   private readonly DIMENSIONS: [number, number];
 
@@ -15,6 +16,8 @@ export class Board {
   private currentPiece?: Piece;
 
   constructor(canvas: HTMLCanvasElement, squareSize = 20, dimensions: [number, number] = [10, 20]) {
+    super();
+
     this.ctx = canvas.getContext("2d")!;
 
     this.SQAURESIZE = squareSize;
@@ -173,6 +176,7 @@ export class Board {
 
   public tick() {
     if (this.gameOver) {
+      this.emit("gameover", this.rowsFilled);
       return;
     }
 
