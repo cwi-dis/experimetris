@@ -9,6 +9,7 @@ export class Board {
 
   private ctx: CanvasRenderingContext2D;
   private board: string[][];
+  private rowsFilled: number;
 
   private currentPiece?: Piece;
 
@@ -20,6 +21,7 @@ export class Board {
 
     const [cols, rows] = this.DIMENSIONS;
     this.board = [];
+    this.rowsFilled = 0;
 
     for (let i = 0; i < rows; i++) {
       this.board[i] = [];
@@ -90,18 +92,38 @@ export class Board {
   }
 
   private updateBoard(piece: Piece) {
-      const shape = piece.getShape();
-      const color = piece.getColor();
-      const position = piece.getPosition();
+    const shape = piece.getShape();
+    const color = piece.getColor();
+    const position = piece.getPosition();
 
-      shape.forEach((row, y) => {
-        row.forEach((filled, x) => {
-          if (filled === 1) {
-            const [boardX, boardY] = [x + position[0], y + position[1]];
-            this.board[boardY][boardX] = color;
-          }
-        });
+    shape.forEach((row, y) => {
+      row.forEach((filled, x) => {
+        if (filled === 1) {
+          const [boardX, boardY] = [x + position[0], y + position[1]];
+          this.board[boardY][boardX] = color;
+        }
       });
+    });
+
+    for (let y = 0; y < this.board.length; y++) {
+      const isFull = this.board[y].every((col) => col !== EMPTY);
+
+      if (isFull) {
+        for (let dy = y; dy > 1; dy--) {
+          for (let dx = 0; dx < this.board[y].length; dx++) {
+            this.board[dy][dx] = this.board[dy - 1][dx];
+          }
+        }
+
+        for (let dx = 0; dx < this.board[y].length; dx++) {
+          this.board[0][dx] = EMPTY;
+        }
+
+        this.rowsFilled += 1;
+      }
+    }
+
+    console.log("Complete rows:", this.rowsFilled);
   }
 
   private draw() {
