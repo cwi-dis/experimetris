@@ -3,12 +3,16 @@ import { useState } from "react";
 
 import Scale from "./scale";
 
+interface RatingResult {
+  value: number;
+}
+
 interface RatingScaleProps {
   question: string;
   min: number;
   max: number;
   labels: [string, string];
-  onContinue: (value: number) => void;
+  onContinue: (data: RatingResult) => void;
 }
 
 const RatingScale: React.FC<RatingScaleProps> = (props) => {
@@ -32,7 +36,7 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
       />
 
       <br />
-      <button className="button is-info" onClick={onContinue.bind(null, value)}>
+      <button className="button is-info" onClick={onContinue.bind(null, { value })}>
         Continue
       </button>
     </div>
