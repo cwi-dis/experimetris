@@ -5,6 +5,20 @@ import { Board, runGame } from "../tetris/board";
 
 export type TetrisDifficulty = "easy" | "normal" | "hard" | "insane";
 
+function mapDifficulty(difficulty: TetrisDifficulty): number {
+  switch (difficulty) {
+    case "easy":
+      return 500;
+    case "hard":
+      return 100;
+    case "insane":
+      return 50;
+    case "normal":
+    default:
+      return 200;
+  }
+}
+
 interface TetrisBoardProps {
   difficulty: TetrisDifficulty;
   onContinue: () => void;
