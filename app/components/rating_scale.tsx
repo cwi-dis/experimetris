@@ -8,7 +8,7 @@ interface RatingScaleProps {
   min: number;
   max: number;
   labels: [string, string];
-  onContinue: () => void;
+  onContinue: (value: number) => void;
 }
 
 const RatingScale: React.FC<RatingScaleProps> = (props) => {
@@ -32,7 +32,7 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
       />
 
       <br />
-      <button className="button is-info" onClick={onContinue}>
+      <button className="button is-info" onClick={onContinue.bind(null, value)}>
         Continue
       </button>
     </div>
