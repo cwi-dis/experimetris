@@ -138,7 +138,7 @@ export class Board extends EventEmitter {
         }
 
         this.rowsFilled += 1;
-        this.emit("rowCompleted");
+        this.emit("rowCompleted", this.rowsFilled);
       }
     }
   }
