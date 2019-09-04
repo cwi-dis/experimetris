@@ -9,6 +9,11 @@ const App: React.FC = () => {
   const [sessionClosed, setSessionClosed] = useState(false);
   const [experiment, setExperiment] = useState<Array<ExperimentStep>>([]);
 
+  const closeSession = (collectedData: Array<any>) => {
+    console.log(collectedData);
+    setSessionClosed(true);
+  };
+
   const renderContent = () => {
     if (sessionClosed) {
       return (
@@ -28,7 +33,7 @@ const App: React.FC = () => {
       return (
         <Experiment
           steps={experiment}
-          closeSession={setSessionClosed.bind(null, true)}
+          closeSession={closeSession}
         />
       );
     }

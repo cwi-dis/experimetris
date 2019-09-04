@@ -29,18 +29,22 @@ export type ExperimentStep = TetrisStep | VideoStep | ScaleStep;
 
 interface ExperimentProps {
   steps: Array<ExperimentStep>;
-  closeSession: () => void;
+  closeSession: (data: Array<any>) => void;
 }
+
+let collectedData: Array<any> = [];
 
 const Experiment: React.FC<ExperimentProps> = (props) => {
   const [steps, setSteps] = useState<Array<ExperimentStep>>(props.steps);
 
-  const gotoNextStep = () => {
-    console.log("Loading next step");
+  const gotoNextStep = (data?: any) => {
+    console.log("Loading next step. Prev step result:", data);
+
+    collectedData.push(data);
     steps.shift();
 
     if (steps.length === 0) {
-      props.closeSession();
+      props.closeSession(collectedData);
     } else {
       setSteps([...steps]);
     }
