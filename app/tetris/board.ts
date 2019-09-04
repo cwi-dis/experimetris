@@ -9,7 +9,8 @@ export class Board {
 
   private ctx: CanvasRenderingContext2D;
   private board: string[][];
-  private rowsFilled: number;
+  private rowsFilled: number = 0;
+  private gameOver: boolean = false;
 
   private currentPiece?: Piece;
 
@@ -21,7 +22,6 @@ export class Board {
 
     const [cols, rows] = this.DIMENSIONS;
     this.board = [];
-    this.rowsFilled = 0;
 
     for (let i = 0; i < rows; i++) {
       this.board[i] = [];
@@ -58,6 +58,14 @@ export class Board {
 
   public getBoard() {
     return this.board;
+  }
+
+  public getRowsFilled() {
+    return this.rowsFilled;
+  }
+
+  public isGameOver() {
+    return this.gameOver;
   }
 
   private getRandomPiece() {
@@ -100,6 +108,12 @@ export class Board {
       row.forEach((filled, x) => {
         if (filled === 1) {
           const [boardX, boardY] = [x + position[0], y + position[1]];
+
+          if (boardY < 0) {
+            this.gameOver = true;
+            return;
+          }
+
           this.board[boardY][boardX] = color;
         }
       });
@@ -123,7 +137,7 @@ export class Board {
       }
     }
 
-    console.log("Complete rows:", this.rowsFilled);
+
   }
 
   private draw() {
@@ -158,6 +172,10 @@ export class Board {
   }
 
   public tick() {
+    if (this.gameOver) {
+      return;
+    }
+
     if (!this.currentPiece) {
       this.currentPiece = this.getRandomPiece();
     }
