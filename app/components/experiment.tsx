@@ -72,6 +72,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
       case "tetris":
         return (
           <TetrisBoard
+            key={Math.random()}
             difficulty={currentStep.difficulty}
             onContinue={gotoNextStep}
           />
