@@ -12,7 +12,7 @@ const TetrisBoard: React.FC = () => {
     }
 
     const canvas = canvasRef.current!;
-    const board = new Board(canvas);
+    const board = new Board(canvas, 30);
 
     setInterval(() => {
       board.tick();

@@ -28,6 +28,28 @@ export class Board {
         this.board[i][j] = EMPTY;
       }
     }
+
+    document.addEventListener("keydown", (e) => {
+      if (!this.currentPiece) {
+        return;
+      }
+
+      console.log("Keyevent:", e.keyCode);
+
+      switch (e.keyCode) {
+        case 37:
+          this.currentPiece.moveLeft();
+          break;
+        case 38:
+          this.currentPiece.rotate();
+          break;
+        case 39:
+          this.currentPiece.moveRight();
+          break;
+        case 40:
+          this.currentPiece.moveDown();
+      }
+    });
   }
 
   public getDimensions() {
