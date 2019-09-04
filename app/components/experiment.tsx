@@ -3,6 +3,11 @@ import { useState } from "react";
 
 import RatingScale from "./rating_scale";
 import EmbeddedVideo from "./embedded_video";
+import TetrisBoard from "./tetris_board";
+
+interface TetrisStep {
+  type: "tetris";
+}
 
 interface VideoStep {
   type: "video";
@@ -19,7 +24,7 @@ interface ScaleStep {
   labels: [string, string];
 }
 
-export type ExperimentStep = VideoStep | ScaleStep;
+export type ExperimentStep = TetrisStep | VideoStep | ScaleStep;
 
 interface ExperimentProps {
   steps: Array<ExperimentStep>;
@@ -61,6 +66,10 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
             stopAfter={currentStep.stopAfter}
             onContinue={gotoNextStep}
           />
+        );
+      case "tetris":
+        return (
+          <TetrisBoard />
         );
       default:
         return null;
