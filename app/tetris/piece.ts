@@ -21,16 +21,31 @@ export default class Piece {
     this.locked = false;
   }
 
-  public rotate() {
-    this.rotation = (this.rotation + 1) % this.shape.length;
-  }
-
   public getShape() {
     return this.shape[this.rotation];
   }
 
   public getColor() {
     return this.color;
+  }
+
+  public rotate() {
+    this.rotation = (this.rotation + 1) % this.shape.length;
+
+    const [x] = this.getPosition();
+    let rotationXShift = 0;
+
+    if (this.collision(0, 0)) {
+      if (x > this.board.getDimensions()[0] / 2) {
+        rotationXShift = -1;
+      } else {
+        rotationXShift = 1;
+      }
+    }
+
+    if (!this.collision(rotationXShift, 0)) {
+      this.position[0] += rotationXShift;
+    }
   }
 
   public moveDown() {

@@ -34,8 +34,6 @@ export class Board {
         return;
       }
 
-      console.log("Keyevent:", e.keyCode);
-
       switch (e.keyCode) {
         case 37:
           this.currentPiece.moveLeft();
