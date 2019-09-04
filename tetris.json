@@ -7,6 +7,9 @@
     "labels": ["don't care", "do care"]
   },
   {
+    "type": "tetris"
+  },
+  {
     "type": "video",
     "videoId": "MPJ0AB12h1I",
     "autoplay": true
