@@ -7,7 +7,8 @@
     "labels": ["don't care", "do care"]
   },
   {
-    "type": "tetris"
+    "type": "tetris",
+    "difficulty": "normal"
   },
   {
     "type": "video",
