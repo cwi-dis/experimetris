@@ -76,7 +76,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       </div>
 
       <canvas
-        style={{ margin: "calc(50vh - 300px) calc(50vw - 150px)" }}
+        style={{ margin: "calc(50vh - 300px) calc(50vw - 150px)", border: "1px solid #555555" }}
         width={300}
         height={600}
         ref={canvasRef}
