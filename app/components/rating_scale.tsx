@@ -4,6 +4,8 @@ import { useState } from "react";
 import Scale from "./scale";
 
 interface RatingResult {
+  questionStarted: number;
+  questionEnded: number;
   value: number;
 }
 
@@ -17,8 +19,9 @@ interface RatingScaleProps {
 
 const RatingScale: React.FC<RatingScaleProps> = (props) => {
   const { question, min, max, labels, onContinue } = props;
-
   const defaultValue = Math.round((max - min) / 2 + min);
+
+  const [questionStarted] = useState<number>(Date.now() / 1000);
   const [value, setValue] = useState<number>(defaultValue);
 
   return (
@@ -36,7 +39,10 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
       />
 
       <br />
-      <button className="button is-info" onClick={onContinue.bind(null, { value })}>
+      <button
+        className="button is-info"
+        onClick={() => onContinue({ questionStarted, value, questionEnded: Date.now() / 1000 })}
+      >
         Continue
       </button>
     </div>
