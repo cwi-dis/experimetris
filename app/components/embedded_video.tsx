@@ -2,11 +2,16 @@ import * as React from "react";
 import { useEffect, useRef } from "react";
 import YouTubePlayer = require("yt-player");
 
+interface EmbeddedVideoResult {
+  videoStarted: number;
+  videoEnded: number;
+}
+
 interface EmbeddedVideoProps {
   videoId: string;
   autoplay: boolean;
   stopAfter?: number;
-  onContinue: () => void;
+  onContinue: (data: EmbeddedVideoResult) => void;
 }
 
 const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
@@ -30,9 +35,18 @@ const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
     player.load(videoId, autoplay);
     player.setVolume(100);
 
+    let start = 0;
+
+    player.on("playing", () => {
+      start = Date.now() / 1000;
+    });
+
     player.on("ended", () => {
       console.log("Video playback ended");
-      onContinue();
+      onContinue({
+        videoStarted: start,
+        videoEnded: Date.now() / 1000
+      });
     });
 
     if (stopAfter) {
@@ -41,7 +55,10 @@ const EmbeddedVideo: React.FC<EmbeddedVideoProps> = (props) => {
           player.stop();
           player.destroy();
 
-          onContinue();
+          onContinue({
+            videoStarted: start,
+            videoEnded: Date.now() / 1000
+          });
         }
       });
     }
