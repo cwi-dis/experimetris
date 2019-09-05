@@ -16,6 +16,8 @@ export function runGame(board: Board, tickLength = 200) {
       board.tick();
     }
 
+    board.draw();
+
     if (!gameOver) {
       requestAnimationFrame(run);
     } else {
@@ -168,7 +170,7 @@ export class Board extends EventEmitter {
     }
   }
 
-  private draw() {
+  public draw() {
     this.ctx.clearRect(
       0, 0,
       this.DIMENSIONS[0] * this.SQAURESIZE, this.DIMENSIONS[1] * this.SQAURESIZE
@@ -217,7 +219,5 @@ export class Board extends EventEmitter {
       this.updateBoard(this.currentPiece);
       this.currentPiece = undefined;
     }
-
-    this.draw();
   }
 }
