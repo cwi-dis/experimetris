@@ -20,9 +20,11 @@ function mapDifficulty(difficulty: TetrisDifficulty): number {
 }
 
 interface TetrisResult {
-  playtime: number;
+  gameStarted: number;
+  gameEnded: number;
   generatedPieces: Array<string>;
-  rowsFilled: number;
+  rowsFilled: Array<number>;
+  numRowsFilled: number;
 }
 
 interface TetrisBoardProps {
@@ -44,15 +46,16 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     const canvas = canvasRef.current!;
     const board = new Board(canvas, 30, [10, 20]);
 
-    const start = Date.now();
+    const gameStarted = Date.now() / 1000;
     runGame(board, mapDifficulty(difficulty));
 
-    board.once("gameover", (rowsFilled: number, generatedPieces: Array<string>) => {
-      console.log("Game ended with score:", rowsFilled);
+    board.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
+      console.log("Game ended with score:", rowsFilled.length);
 
       onContinue({
-        playtime: (Date.now() - start) / 1000,
-        rowsFilled, generatedPieces
+        gameStarted, rowsFilled, generatedPieces,
+        gameEnded: Date.now() / 1000,
+        numRowsFilled: rowsFilled.length
       });
     });
 
