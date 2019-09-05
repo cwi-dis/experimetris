@@ -32,7 +32,7 @@ export class Board extends EventEmitter {
 
   private ctx: CanvasRenderingContext2D;
   private board: string[][];
-  private rowsFilled: number = 0;
+  private rowsFilled: Array<number> = [];
   private gameOver: boolean = false;
 
   private generatedPieces: Array<string> = [];
@@ -87,7 +87,7 @@ export class Board extends EventEmitter {
   }
 
   public getRowsFilled() {
-    return this.rowsFilled;
+    return this.rowsFilled.length;
   }
 
   public isGameOver() {
@@ -162,8 +162,8 @@ export class Board extends EventEmitter {
           this.board[0][dx] = EMPTY;
         }
 
-        this.rowsFilled += 1;
-        this.emit("rowCompleted", this.rowsFilled);
+        this.rowsFilled.push(Date.now() / 1000);
+        this.emit("rowCompleted", this.rowsFilled.length);
       }
     }
   }
