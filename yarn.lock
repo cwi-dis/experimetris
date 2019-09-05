@@ -78,8 +78,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/yt-player@file:../DefinitelyTyped/types/yt-player":
-  version "0.0.0"
+"@types/yt-player@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/yt-player/-/yt-player-3.3.0.tgz#4844a4c8a853d8537c3aa121d12a7c19c16bcdc5"
+  integrity sha512-17H4GHDDQF/YSXwDdMMXb28BTygSeLiDxvqyZa6xeSVJSKeoz0yo/o5ipKXdvu47HfizK3Qtej/WTLqt4PKrAQ==
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
