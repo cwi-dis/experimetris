@@ -79,6 +79,14 @@ export default class Game extends EventEmitter {
     this.gameOver = true;
   }
 
+  public getTickLength() {
+    return this.tickLength;
+  }
+
+  public setTickLength(tickLength: number) {
+    this.tickLength = tickLength;
+  }
+
   private getRandomPiece() {
     const i = Math.floor(Math.random() * PIECES.length);
     const [name, shape, color] = PIECES[i];
