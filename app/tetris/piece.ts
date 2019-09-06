@@ -1,5 +1,5 @@
 import { Tetromino } from "./tetromino";
-import { Board, EMPTY } from "./board";
+import Game, { EMPTY } from "./game";
 
 export default class Piece {
   private shape: Tetromino;
@@ -7,11 +7,11 @@ export default class Piece {
 
   private rotation: number;
   private position: [number, number];
-  private board: Board;
+  private board: Game;
 
   private locked: boolean;
 
-  constructor(board: Board, shape: Tetromino, color: string, position: [number, number] = [0, 0]) {
+  constructor(board: Game, shape: Tetromino, color: string, position: [number, number] = [0, 0]) {
     this.board = board;
     this.shape = shape;
     this.color = color;

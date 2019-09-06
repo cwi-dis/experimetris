@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { Board } from "../tetris/board";
+import Game from "../tetris/game";
 
 export type TetrisDifficulty = "easy" | "normal" | "hard" | "insane";
 
@@ -44,12 +44,12 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     }
 
     const canvas = canvasRef.current!;
-    const board = new Board(canvas, mapDifficulty(difficulty), 30, [10, 20]);
+    const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20]);
 
     const gameStarted = Date.now() / 1000;
-    board.run();
+    game.run();
 
-    board.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
+    game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
       console.log("Game ended with score:", rowsFilled.length);
 
       onContinue({
@@ -59,11 +59,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       });
     });
 
-    board.on("pieceGenerated", (name: string) => {
-      console.log("New piece generated:", name);
-    });
-
-    board.on("rowCompleted", (rowsFilled: number) => {
+    game.on("rowCompleted", (rowsFilled: number) => {
       console.log("New row completed");
       setScore(rowsFilled);
     });

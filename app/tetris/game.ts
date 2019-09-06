@@ -4,7 +4,7 @@ import { EventEmitter } from "events";
 
 export const EMPTY = "transparent";
 
-export class Board extends EventEmitter {
+export default class Game extends EventEmitter {
   private readonly SQAURESIZE: number;
   private readonly DIMENSIONS: [number, number];
 
