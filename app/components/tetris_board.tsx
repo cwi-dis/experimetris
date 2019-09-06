@@ -29,6 +29,7 @@ interface TetrisResult {
 
 interface TetrisBoardProps {
   difficulty: TetrisDifficulty;
+  timeLimit?: number;
   onContinue: (data: TetrisResult) => void;
 }
 
@@ -36,7 +37,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
   const [score, setScore] = useState<number>(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { difficulty, onContinue } = props;
+  const { difficulty, timeLimit, onContinue } = props;
 
   useEffect(() => {
     if (!canvasRef) {
@@ -48,6 +49,10 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
 
     const gameStarted = Date.now() / 1000;
     game.run();
+
+    if (timeLimit) {
+      setTimeout(() => game.stopGame(), timeLimit * 1000);
+    }
 
     game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
       console.log("Game ended with score:", rowsFilled.length);

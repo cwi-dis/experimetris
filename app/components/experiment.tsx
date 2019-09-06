@@ -8,6 +8,7 @@ import TetrisBoard, { TetrisDifficulty } from "./tetris_board";
 interface TetrisStep {
   type: "tetris";
   difficulty: TetrisDifficulty;
+  timeLimit?: number;
 }
 
 interface VideoStep {
@@ -78,6 +79,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
           <TetrisBoard
             key={Math.random()}
             difficulty={currentStep.difficulty}
+            timeLimit={currentStep.timeLimit}
             onContinue={gotoNextStep}
           />
         );
