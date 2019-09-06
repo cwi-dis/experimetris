@@ -94,7 +94,12 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     <div>
       <div className="score" style={{ top: (timeLimit) ? 50 : 80}}>
         {score * 10}
-        {(timeLimit) ? <span>{formatTimer(timer)}</span> : null}
+        {(timeLimit)
+          ? <span style={{ color: (timer <= 10) ? "#B60E11" : "inherit"}}>
+              {formatTimer(timer)}
+            </span>
+          : null
+        }
       </div>
 
       <canvas
