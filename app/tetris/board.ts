@@ -4,30 +4,6 @@ import { EventEmitter } from "events";
 
 export const EMPTY = "transparent";
 
-export function runGame(board: Board, tickLength = 200) {
-  let gameOver = false;
-  let lastTick = Date.now();
-
-  board.once("gameover", () => gameOver = true);
-
-  const run = () => {
-    if (Date.now() - lastTick > tickLength) {
-      lastTick = Date.now();
-      board.tick();
-    }
-
-    board.draw();
-
-    if (!gameOver) {
-      requestAnimationFrame(run);
-    } else {
-      console.log("requestAnimationFrame cancelled");
-    }
-  };
-
-  run();
-}
-
 export class Board extends EventEmitter {
   private readonly SQAURESIZE: number;
   private readonly DIMENSIONS: [number, number];
@@ -35,16 +11,19 @@ export class Board extends EventEmitter {
   private ctx: CanvasRenderingContext2D;
   private board: string[][];
   private rowsFilled: Array<number> = [];
-  private gameOver: boolean = false;
 
   private generatedPieces: Array<[string, number]> = [];
   private currentPiece?: Piece;
 
-  constructor(canvas: HTMLCanvasElement, squareSize = 20, dimensions: [number, number] = [10, 20]) {
+  private tickLength: number;
+  private gameOver: boolean = false;
+
+  constructor(canvas: HTMLCanvasElement, tickLength = 200, squareSize = 20, dimensions: [number, number] = [10, 20]) {
     super();
 
     this.ctx = canvas.getContext("2d")!;
 
+    this.tickLength = tickLength;
     this.SQAURESIZE = squareSize;
     this.DIMENSIONS = dimensions;
 
@@ -170,7 +149,7 @@ export class Board extends EventEmitter {
     }
   }
 
-  public draw() {
+  private draw() {
     this.ctx.clearRect(
       0, 0,
       this.DIMENSIONS[0] * this.SQAURESIZE, this.DIMENSIONS[1] * this.SQAURESIZE
@@ -201,9 +180,8 @@ export class Board extends EventEmitter {
     }
   }
 
-  public tick() {
+  private tick() {
     if (this.gameOver) {
-      this.emit("gameover", this.rowsFilled, this.generatedPieces);
       return;
     }
 
@@ -219,5 +197,27 @@ export class Board extends EventEmitter {
       this.updateBoard(this.currentPiece);
       this.currentPiece = undefined;
     }
+  }
+
+  public run() {
+    let lastTick = Date.now();
+
+    const gameLoop = () => {
+      if (Date.now() - lastTick > this.tickLength) {
+        lastTick = Date.now();
+        this.tick();
+      }
+
+      this.draw();
+
+      if (!this.gameOver) {
+        requestAnimationFrame(gameLoop);
+      } else {
+        console.log("requestAnimationFrame cancelled");
+        this.emit("gameover", this.rowsFilled, this.generatedPieces);
+      }
+    };
+
+    gameLoop();
   }
 }
