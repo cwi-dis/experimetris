@@ -75,6 +75,10 @@ export default class Game extends EventEmitter {
     return this.gameOver;
   }
 
+  public stopGame() {
+    this.gameOver = true;
+  }
+
   private getRandomPiece() {
     const i = Math.floor(Math.random() * PIECES.length);
     const [name, shape, color] = PIECES[i];
