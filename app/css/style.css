@@ -41,14 +41,19 @@ html, body {
 }
 
 .score {
-  width: 100px;
+  width: 200px;
 
   position: absolute;
-  top: 80px;
-  left: calc(50vw - 50px);
+  left: calc(50vw - 100px);
 
   text-align: center;
   font-size: 36pt;
+}
+
+.score span {
+  color: #555555;
+  font-size: 24pt;
+  display: block;
 }
 
 #end-screen {

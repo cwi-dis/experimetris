@@ -19,6 +19,13 @@ function mapDifficulty(difficulty: TetrisDifficulty): number {
   }
 }
 
+function formatTimer(time: number) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time - (minutes * 60);
+
+  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+
 interface TetrisResult {
   gameStarted: number;
   gameEnded: number;
@@ -34,10 +41,11 @@ interface TetrisBoardProps {
 }
 
 const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
-  const [score, setScore] = useState<number>(0);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
   const { difficulty, timeLimit, onContinue } = props;
+
+  const [score, setScore] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(timeLimit || 0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!canvasRef) {
@@ -51,7 +59,19 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     game.run();
 
     if (timeLimit) {
-      setTimeout(() => game.stopGame(), timeLimit * 1000);
+      let countdown = timeLimit;
+
+      const timerInterval = setInterval(() => {
+        countdown -= 1;
+
+        setTimer(countdown);
+        console.log("timer:", countdown);
+      }, 1000);
+
+      setTimeout(() => {
+        clearInterval(timerInterval);
+        game.stopGame();
+      }, timeLimit * 1000);
     }
 
     game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
@@ -72,8 +92,9 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
 
   return (
     <div>
-      <div className="score">
+      <div className="score" style={{ top: (timeLimit) ? 50 : 80}}>
         {score * 10}
+        {(timeLimit) ? <span>{formatTimer(timer)}</span> : null}
       </div>
 
       <canvas
