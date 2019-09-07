@@ -78,10 +78,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/yt-player@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@types/yt-player/-/yt-player-3.3.0.tgz#4844a4c8a853d8537c3aa121d12a7c19c16bcdc5"
-  integrity sha512-17H4GHDDQF/YSXwDdMMXb28BTygSeLiDxvqyZa6xeSVJSKeoz0yo/o5ipKXdvu47HfizK3Qtej/WTLqt4PKrAQ==
+"@types/yt-player@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@types/yt-player/-/yt-player-3.4.0.tgz#1f75e64908a155eff469afe68744900bb7a284e1"
+  integrity sha512-zGmh/+tat4ve4D/j1IpH1c89ae7oE/szyoRCw/i+isj1cCGpOvWMX39DOZIc/rw05ddpMgg/n4LspeFj6HBlsA==
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -4651,9 +4651,9 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yt-player@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/yt-player/-/yt-player-3.3.0.tgz#dd5f992c598ce8cc4a04332ef487463218e0eeaf"
-  integrity sha512-ZU7DK/jhaypNkkhTrdgaf6+5Lehu3//6iUfP+mx61liNGfdYP08U0oluc63qrC7NNMPUaArwi5qyYatzOwgk1Q==
+yt-player@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/yt-player/-/yt-player-3.4.0.tgz#240b14466dae9e7635e4cf039e6e813fe5ada991"
+  integrity sha512-5C8YbJgTo9Q77Qsvno1WvMVY5fHE5rHibw48RyvMjDP7CZjHkqi34AW4kkihv2AKDqbD8PfQh2RchVxbcI4zEg==
   dependencies:
     load-script2 "^2.0.1"
