@@ -43,17 +43,17 @@ export default class Game extends EventEmitter {
         return;
       }
 
-      switch (e.keyCode) {
-        case 37:
+      switch (e.key) {
+        case "ArrowLeft":
           this.currentPiece.moveLeft();
           break;
-        case 38:
+        case "ArrowUp":
           this.currentPiece.rotate();
           break;
-        case 39:
+        case "ArrowRight":
           this.currentPiece.moveRight();
           break;
-        case 40:
+        case "ArrowDown":
           this.currentPiece.moveDown();
       }
     });
