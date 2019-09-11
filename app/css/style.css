@@ -57,10 +57,8 @@ html, body {
 }
 
 .score {
-  width: 200px;
-
-  position: absolute;
-  left: calc(50vw - 100px);
+  width: 100%;
+  margin-top: 5vh;
 
   text-align: center;
   font-size: 36pt;
@@ -70,6 +68,11 @@ html, body {
   color: #555555;
   font-size: 24pt;
   display: block;
+}
+
+.tetris-canvas {
+  margin: 40px calc(50vw - 150px);
+  border: 1px solid #555555;
 }
 
 #end-screen {
