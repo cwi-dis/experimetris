@@ -3,6 +3,7 @@ import { useState } from "react";
 import * as classNames from "classnames";
 
 import { ExperimentStep } from "./experiment";
+import { shuffle } from "../util";
 
 interface ExperimentLoaderProps {
   onDataLoaded: (data: Array<ExperimentStep>) => void;
@@ -21,7 +22,18 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
 
     reader.onload = (e: any) => {
       const content = e.target.result;
-      onDataLoaded(JSON.parse(content));
+      const experimentData: Array<any> = JSON.parse(content);
+
+      const indicesToRandomize = experimentData.reduce<Array<number>>((foundIndices, step, i) => {
+        return (step.randomize && step.randomize === true)
+          ? foundIndices.concat([i])
+          : foundIndices;
+      }, []);
+
+      const shuffledSteps = shuffle(indicesToRandomize).map((i) => experimentData[i]);
+      indicesToRandomize.forEach((i, j) => experimentData[i] = shuffledSteps[j]);
+
+      onDataLoaded(experimentData);
     };
 
     reader.onerror = () => {

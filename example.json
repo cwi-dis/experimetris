@@ -9,7 +9,20 @@
   {
     "type": "tetris",
     "difficulty": "normal",
-    "timeLimit": 10
+    "timeLimit": 5,
+    "randomize": true
+  },
+  {
+    "type": "tetris",
+    "difficulty": "normal",
+    "timeLimit": 10,
+    "randomize": true
+  },
+  {
+    "type": "tetris",
+    "difficulty": "normal",
+    "timeLimit": 15,
+    "randomize": true
   },
   {
     "type": "video",
