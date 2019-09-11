@@ -32,6 +32,7 @@ interface TetrisResult {
   generatedPieces: Array<string>;
   rowsFilled: Array<number>;
   numRowsFilled: number;
+  gameEndedThrough: "timerExpired" | "gameOver";
 }
 
 interface TetrisBoardProps {
@@ -56,6 +57,8 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20]);
 
     const gameStarted = Date.now() / 1000;
+    let timerExpired = false;
+
     game.run();
 
     if (timeLimit) {
@@ -70,6 +73,8 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
 
       setTimeout(() => {
         clearInterval(timerInterval);
+        timerExpired = true;
+
         game.stopGame();
       }, timeLimit * 1000);
     }
@@ -80,6 +85,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       onContinue({
         gameStarted, rowsFilled, generatedPieces,
         gameEnded: Date.now() / 1000,
+        gameEndedThrough: (timerExpired) ? "timerExpired" : "gameOver",
         numRowsFilled: rowsFilled.length
       });
     });
