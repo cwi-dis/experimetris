@@ -33,6 +33,7 @@ interface TetrisResult {
   rowsFilled: Array<number>;
   numRowsFilled: number;
   gameEndedThrough: "timerExpired" | "gameOver";
+  difficulty: TetrisDifficulty;
 }
 
 interface TetrisBoardProps {
@@ -68,7 +69,6 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
         countdown -= 1;
 
         setTimer(countdown);
-        console.log("timer:", countdown);
       }, 1000);
 
       setTimeout(() => {
@@ -83,7 +83,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       console.log("Game ended with score:", rowsFilled.length);
 
       onContinue({
-        gameStarted, rowsFilled, generatedPieces,
+        gameStarted, rowsFilled, generatedPieces, difficulty,
         gameEnded: Date.now() / 1000,
         gameEndedThrough: (timerExpired) ? "timerExpired" : "gameOver",
         numRowsFilled: rowsFilled.length
