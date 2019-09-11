@@ -28,6 +28,15 @@ html, body {
   margin: 15% auto;
 }
 
+.questionnaire-container {
+  width: 50vw;
+  margin: 10px auto 20px auto;
+}
+
+.questionnaire-container > div {
+  margin: 25px 0;
+}
+
 .dropzone {
   width: 50vw;
   height: 50vh;
