@@ -1,6 +1,8 @@
+import { EventEmitter } from "events";
+
 import Piece from "./piece";
 import { PIECES } from "./tetromino";
-import { EventEmitter } from "events";
+import { Range } from "../util";
 
 export const EMPTY = "transparent";
 
@@ -28,15 +30,7 @@ export default class Game extends EventEmitter {
     this.DIMENSIONS = dimensions;
 
     const [cols, rows] = this.DIMENSIONS;
-    this.board = [];
-
-    for (let i = 0; i < rows; i++) {
-      this.board[i] = [];
-
-      for (let j = 0; j < cols; j++) {
-        this.board[i][j] = EMPTY;
-      }
-    }
+    this.board = Range(0, rows).map(() => new Array(cols).fill(EMPTY));
 
     document.addEventListener("keydown", (e) => {
       if (!this.currentPiece) {
