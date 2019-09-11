@@ -4,6 +4,7 @@ import { useState } from "react";
 import RatingScale from "./rating_scale";
 import EmbeddedVideo from "./embedded_video";
 import TetrisBoard, { TetrisDifficulty } from "./tetris_board";
+import Questionnaire from "./questionnaire";
 
 interface TetrisStep {
   type: "tetris";
@@ -26,7 +27,12 @@ interface ScaleStep {
   labels: [string, string];
 }
 
-export type ExperimentStep = TetrisStep | VideoStep | ScaleStep;
+interface QuestionnaireStep {
+  type: "questionnaire";
+  questions: Array<string>;
+}
+
+export type ExperimentStep = TetrisStep | VideoStep | ScaleStep | QuestionnaireStep;
 
 interface ExperimentProps {
   steps: Array<ExperimentStep>;
@@ -80,6 +86,13 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
             key={Math.random()}
             difficulty={currentStep.difficulty}
             timeLimit={currentStep.timeLimit}
+            onContinue={gotoNextStep}
+          />
+        );
+      case "questionnaire":
+        return (
+          <Questionnaire
+            questions={currentStep.questions}
             onContinue={gotoNextStep}
           />
         );
