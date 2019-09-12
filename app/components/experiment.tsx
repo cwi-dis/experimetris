@@ -10,6 +10,7 @@ interface TetrisStep {
   type: "tetris";
   difficulty: TetrisDifficulty;
   timeLimit?: number;
+  adaptiveDifficulty?: boolean;
 }
 
 interface VideoStep {
@@ -86,6 +87,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
             key={Math.random()}
             difficulty={currentStep.difficulty}
             timeLimit={currentStep.timeLimit}
+            adaptiveDifficulty={currentStep.adaptiveDifficulty}
             onContinue={gotoNextStep}
           />
         );

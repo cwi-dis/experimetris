@@ -39,11 +39,12 @@ interface TetrisResult {
 interface TetrisBoardProps {
   difficulty: TetrisDifficulty;
   timeLimit?: number;
+  adaptiveDifficulty?: boolean;
   onContinue: (data: TetrisResult) => void;
 }
 
 const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
-  const { difficulty, timeLimit, onContinue } = props;
+  const { difficulty, adaptiveDifficulty, timeLimit, onContinue } = props;
 
   const [score, setScore] = useState<number>(0);
   const [timer, setTimer] = useState<number>(timeLimit || 0);
@@ -79,6 +80,32 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       }, timeLimit * 1000);
     }
 
+    let lastNumRowsFilled = 0, numRowsFilled = 0, numPiecesGenerated = 0;
+
+    if (adaptiveDifficulty) {
+      console.log("Adapting difficulty mode active");
+
+      game.on("pieceGenerated", () => {
+        numPiecesGenerated += 1;
+        console.log("Piece generated:", numPiecesGenerated, numRowsFilled, lastNumRowsFilled);
+
+        if (numPiecesGenerated > 0 && numPiecesGenerated % 30 === 0) {
+          const delta = (numRowsFilled >= lastNumRowsFilled + 5) ? -10 : 10;
+          game.changeTickLengthBy(delta);
+
+          console.log("Changing tick length by", delta, "new tick length:", game.getTickLength());
+          lastNumRowsFilled = numRowsFilled;
+        }
+      });
+    }
+
+    game.on("rowCompleted", (rowsFilled: number) => {
+      console.log("New row completed");
+
+      numRowsFilled += 1;
+      setScore(rowsFilled);
+    });
+
     game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
       console.log("Game ended with score:", rowsFilled.length);
 
@@ -89,15 +116,10 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
         numRowsFilled: rowsFilled.length
       });
     });
-
-    game.on("rowCompleted", (rowsFilled: number) => {
-      console.log("New row completed");
-      setScore(rowsFilled);
-    });
   }, []);
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <div className="score">
         {score * 10}
         {(timeLimit)
