@@ -116,6 +116,11 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
         numRowsFilled: rowsFilled.length
       });
     });
+
+    return () => {
+      console.log("Unmounting component, unregistering listeners...");
+      game.unregisterKeyListener();
+    };
   }, []);
 
   return (
