@@ -20,6 +20,8 @@ export default class Game extends EventEmitter {
   private tickLength: number;
   private gameOver: boolean = false;
 
+  private keyListener: (e: KeyboardEvent) => void;
+
   constructor(canvas: HTMLCanvasElement, tickLength = 200, squareSize = 20, dimensions: [number, number] = [10, 20]) {
     super();
 
@@ -32,7 +34,7 @@ export default class Game extends EventEmitter {
     const [cols, rows] = this.DIMENSIONS;
     this.board = Range(0, rows).map(() => new Array(cols).fill(EMPTY));
 
-    document.addEventListener("keydown", (e) => {
+    this.keyListener = (e) => {
       if (!this.currentPiece) {
         return;
       }
@@ -50,7 +52,13 @@ export default class Game extends EventEmitter {
         case "ArrowDown":
           this.currentPiece.moveDown();
       }
-    });
+    };
+
+    document.addEventListener("keydown", this.keyListener);
+  }
+
+  public unregisterKeyListener() {
+    document.removeEventListener("keydown", this.keyListener);
   }
 
   public getDimensions() {
