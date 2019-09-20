@@ -84,17 +84,30 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     let lastNumRowsFilled = 0, numRowsFilled = 0, numPiecesGenerated = 0;
 
     if (adaptiveDifficulty) {
-      console.log("Adapting difficulty mode active");
+      const settings = (typeof adaptiveDifficulty !== "boolean")
+        ? adaptiveDifficulty
+        : { checkAfterNPieces: 30, minRowsCompleted: 3, maxRowsCompleted: 5, difficultyDelta: 10 };
+
+      console.log("Adaptive difficulty mode active:", settings);
 
       game.on("pieceGenerated", () => {
         numPiecesGenerated += 1;
         console.log("Piece generated:", numPiecesGenerated, numRowsFilled, lastNumRowsFilled);
 
-        if (numPiecesGenerated > 0 && numPiecesGenerated % 30 === 0) {
-          const delta = (numRowsFilled >= lastNumRowsFilled + 5) ? -10 : 10;
-          game.changeTickLengthBy(delta);
+        if (numPiecesGenerated === 0) {
+          return;
+        }
 
-          console.log("Changing tick length by", delta, "new tick length:", game.getTickLength());
+        if (numPiecesGenerated % settings.checkAfterNPieces === 0) {
+          if (numRowsFilled - lastNumRowsFilled >= settings.maxRowsCompleted) {
+            console.log("Decreasing tick length by", settings.difficultyDelta);
+            game.changeTickLengthBy(-settings.difficultyDelta);
+          } else if (numRowsFilled - lastNumRowsFilled <= settings.minRowsCompleted) {
+            console.log("Increasing tick length by", settings.difficultyDelta);
+            game.changeTickLengthBy(settings.difficultyDelta);
+          }
+
+          console.log("New tick length:", game.getTickLength());
           lastNumRowsFilled = numRowsFilled;
         }
       });
