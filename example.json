@@ -18,7 +18,12 @@
   {
     "type": "tetris",
     "difficulty": "normal",
-    "timeLimit": 5,
+    "adaptiveDifficulty": {
+      "checkAfterNPieces": 10,
+      "maxRowsCompleted": 3,
+      "minRowsCompleted": 2,
+      "difficultyDelta": 10
+    },
     "randomize": true
   },
   {
