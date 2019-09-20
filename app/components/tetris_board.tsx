@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 
 import Game from "../tetris/game";
+import { AdaptiveDifficultySettings } from "./experiment";
 
 export type TetrisDifficulty = "easy" | "normal" | "hard" | "insane";
 
@@ -39,7 +40,7 @@ interface TetrisResult {
 interface TetrisBoardProps {
   difficulty: TetrisDifficulty;
   timeLimit?: number;
-  adaptiveDifficulty?: boolean;
+  adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
   onContinue: (data: TetrisResult) => void;
 }
 

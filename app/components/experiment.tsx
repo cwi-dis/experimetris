@@ -6,11 +6,18 @@ import EmbeddedVideo from "./embedded_video";
 import TetrisBoard, { TetrisDifficulty } from "./tetris_board";
 import Questionnaire from "./questionnaire";
 
+export interface AdaptiveDifficultySettings {
+  checkAfterNPieces: number;
+  minRowsCompleted: number;
+  maxRowsCompleted: number;
+  difficultyDelta: number;
+}
+
 interface TetrisStep {
   type: "tetris";
   difficulty: TetrisDifficulty;
   timeLimit?: number;
-  adaptiveDifficulty?: boolean;
+  adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
 }
 
 interface VideoStep {
