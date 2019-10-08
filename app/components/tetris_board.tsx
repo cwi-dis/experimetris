@@ -6,6 +6,13 @@ import { AdaptiveDifficultySettings } from "./experiment";
 
 export type TetrisDifficulty = "easy" | "normal" | "hard" | "insane";
 
+const ADAPTIVE_DIFFICULTY_DEFAULT = {
+  checkAfterNPieces: 30,
+  minRowsCompleted: 5,
+  maxRowsCompleted: 3,
+  difficultyDelta: 10
+};
+
 function mapDifficulty(difficulty: TetrisDifficulty): number {
   switch (difficulty) {
     case "easy":
@@ -86,7 +93,7 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     if (adaptiveDifficulty) {
       const settings = (typeof adaptiveDifficulty !== "boolean")
         ? adaptiveDifficulty
-        : { checkAfterNPieces: 30, minRowsCompleted: 3, maxRowsCompleted: 5, difficultyDelta: 10 };
+        : ADAPTIVE_DIFFICULTY_DEFAULT;
 
       console.log("Adaptive difficulty mode active:", settings);
 
