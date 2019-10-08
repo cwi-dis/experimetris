@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://github.com/cwi-dis/tetris-study/blob/master/schema.json",
+
+  "definitions": {
+    "embeddedvideo": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "video" },
+        "videoId": { "type": "string" },
+        "autoplay": { "type": "boolean" },
+        "stopAfter": { "type": "number" },
+        "randomize": { "type": "boolean" }
+      },
+      "required": ["type", "videoId", "autoplay"],
+      "additionalProperties": false
+    },
+
+    "scale": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "scale" },
+        "question": { "type": "string" },
+        "min": { "type": "integer" },
+        "max": { "type": "integer" },
+        "labels": { "$ref": "#/definitions/scaleLabels" },
+        "randomize": { "type": "boolean" }
+      },
+      "required": ["type", "question", "min", "max"],
+      "additionalProperties": false
+    },
+
+    "scaleLabels": {
+      "type": "array",
+      "items": [
+        { "type": "string" },
+        { "type": "string" }
+      ],
+      "additionalItems": false
+    },
+
+    "questionnaire": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "questionnaire" },
+        "questions": { "type": "array", "items": { "type": "string" } },
+        "randomize": { "type": "boolean" }
+      },
+      "required": ["type", "questions"],
+      "additionalProperties": false
+    },
+
+    "tetris": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "tetris" },
+        "difficulty": { "enum": ["easy", "normal", "hard", "insane"] },
+        "timeLimit": { "type": "number" },
+        "adaptiveDifficulty": {
+          "anyOf": [
+            { "type": "boolean" },
+            { "$ref": "#/definitions/adaptiveDifficulty" }
+          ]
+        },
+        "randomize": { "type": "boolean" }
+      },
+      "required": ["type", "difficulty"],
+      "additionalProperties": false
+    },
+
+    "adaptiveDifficulty": {
+      "type": "object",
+      "properties": {
+        "checkAfterNPieces": { "type": "number" },
+        "minRowsCompleted": { "type": "number" },
+        "maxRowsCompleted": { "type": "number" },
+        "difficultyDelta": { "type": "number" }
+      },
+      "required": [
+        "checkAfterNPieces",
+        "minRowsCompleted",
+        "maxRowsCompleted",
+        "difficultyDelta"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "type": "array",
+  "items": {
+    "anyOf": [
+      { "$ref": "#/definitions/embeddedvideo" },
+      { "$ref": "#/definitions/scale" },
+      { "$ref": "#/definitions/questionnaire" },
+      { "$ref": "#/definitions/tetris" }
+    ]
+  }
+}
