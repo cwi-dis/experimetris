@@ -1,9 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
 import * as classNames from "classnames";
+import * as Ajv from "ajv";
 
 import { ExperimentStep } from "./experiment";
 import { shuffle } from "../util";
+import * as schema from "../schema.json";
 
 interface ExperimentLoaderProps {
   onDataLoaded: (data: Array<ExperimentStep>) => void;
@@ -23,6 +25,16 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
     reader.onload = (e: any) => {
       const content = e.target.result;
       const experimentData: Array<any> = JSON.parse(content);
+
+      const validator = new Ajv().compile(schema);
+      const result = validator(experimentData);
+
+      if (result !== true) {
+        alert("The given file does not conform to the specified schema! Please make sure the file is well-formed");
+        console.error(validator.errors);
+
+        return;
+      }
 
       const indicesToRandomize = experimentData.reduce<Array<number>>((foundIndices, step, i) => {
         return (step.randomize && step.randomize === true)
