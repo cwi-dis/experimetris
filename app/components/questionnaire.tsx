@@ -11,11 +11,14 @@ interface QuestionnaireResult {
 
 interface QuestionnaireProps {
   questions: Array<string>;
+  min: number;
+  max: number;
+  labels: [string, string];
   onContinue: (data: QuestionnaireResult) => void;
 }
 
 const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
-  const { questions, onContinue } = props;
+  const { questions, min, max, labels, onContinue } = props;
 
   const [questionStarted] = useState<number>(Date.now() / 1000);
   const [responses, setResponses] = useState<Array<number>>(new Array(questions.length).fill(5));
@@ -35,9 +38,10 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
         </h5>
 
         <Scale
-          min={1}
-          max={9}
+          min={min}
+          max={max}
           value={value}
+          labels={labels}
           onChange={updateResponse.bind(null, index)}
         />
       </div>

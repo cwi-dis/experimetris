@@ -38,6 +38,9 @@ interface ScaleStep {
 interface QuestionnaireStep {
   type: "questionnaire";
   questions: Array<string>;
+  min: number;
+  max: number;
+  labels: [string, string];
 }
 
 export type ExperimentStep = TetrisStep | VideoStep | ScaleStep | QuestionnaireStep;
@@ -102,6 +105,9 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
         return (
           <Questionnaire
             questions={currentStep.questions}
+            min={currentStep.min}
+            max={currentStep.max}
+            labels={currentStep.labels}
             onContinue={gotoNextStep}
           />
         );
