@@ -18,6 +18,7 @@ interface TetrisStep {
   difficulty: TetrisDifficulty;
   timeLimit?: number;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
+  id?: string;
 }
 
 interface VideoStep {
@@ -25,6 +26,7 @@ interface VideoStep {
   videoId: string;
   autoplay: boolean;
   stopAfter?: number;
+  id?: string;
 }
 
 interface ScaleStep {
@@ -33,6 +35,7 @@ interface ScaleStep {
   min: number;
   max: number;
   labels: [string, string];
+  id?: string;
 }
 
 interface QuestionnaireStep {
@@ -42,6 +45,7 @@ interface QuestionnaireStep {
   min: number;
   max: number;
   labels: [string, string];
+  id?: string;
 }
 
 export type ExperimentStep = TetrisStep | VideoStep | ScaleStep | QuestionnaireStep;
@@ -58,8 +62,12 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
 
   const gotoNextStep = (data?: any) => {
     console.log("Loading next step. Prev step result:", data);
+    const [{ id }] = steps;
 
-    collectedData.push(data);
+    collectedData.push(
+      (id) ? Object.assign({}, data, { id }) : data
+    );
+
     steps.shift();
 
     if (steps.length === 0) {

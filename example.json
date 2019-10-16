@@ -28,19 +28,22 @@
       "minRowsCompleted": 2,
       "difficultyDelta": 10
     },
-    "randomize": true
+    "randomize": true,
+    "id": "No time limit and adaptive difficulty"
   },
   {
     "type": "tetris",
     "difficulty": "normal",
     "timeLimit": 10,
-    "randomize": true
+    "randomize": true,
+    "id": "Normal difficulty and 10 seconds time limit"
   },
   {
     "type": "tetris",
     "difficulty": "normal",
     "timeLimit": 15,
-    "randomize": true
+    "randomize": true,
+    "id": "Normal difficulty and 15 seconds time limit"
   },
   {
     "type": "video",

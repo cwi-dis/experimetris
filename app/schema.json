@@ -10,7 +10,8 @@
         "videoId": { "type": "string" },
         "autoplay": { "type": "boolean" },
         "stopAfter": { "type": "number" },
-        "randomize": { "type": "boolean" }
+        "randomize": { "type": "boolean" },
+        "id": { "type": "string" }
       },
       "required": ["type", "videoId", "autoplay"],
       "additionalProperties": false
@@ -24,7 +25,8 @@
         "min": { "type": "integer" },
         "max": { "type": "integer" },
         "labels": { "$ref": "#/definitions/scaleLabels" },
-        "randomize": { "type": "boolean" }
+        "randomize": { "type": "boolean" },
+        "id": { "type": "string" }
       },
       "required": ["type", "question", "min", "max"],
       "additionalProperties": false
@@ -39,7 +41,8 @@
         "min": { "type": "integer" },
         "max": { "type": "integer" },
         "labels": { "$ref": "#/definitions/scaleLabels" },
-        "randomize": { "type": "boolean" }
+        "randomize": { "type": "boolean" },
+        "id": { "type": "string" }
       },
       "required": ["type", "questions"],
       "additionalProperties": false
@@ -66,7 +69,8 @@
             { "$ref": "#/definitions/adaptiveDifficulty" }
           ]
         },
-        "randomize": { "type": "boolean" }
+        "randomize": { "type": "boolean" },
+        "id": { "type": "string" }
       },
       "required": ["type", "difficulty"],
       "additionalProperties": false
