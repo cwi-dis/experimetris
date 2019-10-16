@@ -70,7 +70,12 @@
       "type": "object",
       "properties": {
         "type": { "const": "tetris" },
-        "difficulty": { "enum": ["easy", "normal", "hard", "insane"] },
+        "difficulty": {
+          "anyOf": [
+            { "enum": ["easy", "normal", "hard", "insane"] },
+            { "type": "number", "minimum": 0 }
+          ]
+        },
         "timeLimit": { "type": "number" },
         "adaptiveDifficulty": {
           "anyOf": [
