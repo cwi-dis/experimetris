@@ -1,6 +1,7 @@
 [
   {
     "type": "questionnaire",
+    "instructions": "Fill out the questionnaire below, bla bla bla yadda yadda, lorem ipsum dolor sit amet",
     "min": 1,
     "max": 7,
     "labels": ["no", "yes"],
