@@ -1,6 +1,9 @@
 [
   {
     "type": "questionnaire",
+    "min": 1,
+    "max": 7,
+    "labels": ["no", "yes"],
     "questions": [
       "Some question",
       "Some other question",

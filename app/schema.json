@@ -30,6 +30,20 @@
       "additionalProperties": false
     },
 
+    "questionnaire": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "questionnaire" },
+        "questions": { "type": "array", "items": { "type": "string" } },
+        "min": { "type": "integer" },
+        "max": { "type": "integer" },
+        "labels": { "$ref": "#/definitions/scaleLabels" },
+        "randomize": { "type": "boolean" }
+      },
+      "required": ["type", "questions"],
+      "additionalProperties": false
+    },
+
     "scaleLabels": {
       "type": "array",
       "items": [
@@ -37,17 +51,6 @@
         { "type": "string" }
       ],
       "additionalItems": false
-    },
-
-    "questionnaire": {
-      "type": "object",
-      "properties": {
-        "type": { "const": "questionnaire" },
-        "questions": { "type": "array", "items": { "type": "string" } },
-        "randomize": { "type": "boolean" }
-      },
-      "required": ["type", "questions"],
-      "additionalProperties": false
     },
 
     "tetris": {
