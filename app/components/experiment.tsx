@@ -21,7 +21,7 @@ interface ParticipantIdStep {
 
 interface TetrisStep {
   type: "tetris";
-  difficulty: TetrisDifficulty;
+  difficulty: TetrisDifficulty | number;
   timeLimit?: number;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
   id?: string;

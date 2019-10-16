@@ -13,7 +13,11 @@ const ADAPTIVE_DIFFICULTY_DEFAULT = {
   difficultyDelta: 10
 };
 
-function mapDifficulty(difficulty: TetrisDifficulty): number {
+function mapDifficulty(difficulty: TetrisDifficulty | number): number {
+  if (typeof difficulty === "number") {
+    return difficulty;
+  }
+
   switch (difficulty) {
     case "easy":
       return 500;
@@ -41,11 +45,11 @@ interface TetrisResult {
   rowsFilled: Array<number>;
   numRowsFilled: number;
   gameEndedThrough: "timerExpired" | "gameOver";
-  difficulty: TetrisDifficulty;
+  difficulty: TetrisDifficulty | number;
 }
 
 interface TetrisBoardProps {
-  difficulty: TetrisDifficulty;
+  difficulty: TetrisDifficulty | number;
   timeLimit?: number;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
   onContinue: (data: TetrisResult) => void;
