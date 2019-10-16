@@ -21,7 +21,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
   const { questions, min, max, labels, onContinue } = props;
 
   const [questionStarted] = useState<number>(Date.now() / 1000);
-  const [responses, setResponses] = useState<Array<number>>(new Array(questions.length).fill(5));
+  const [responses, setResponses] = useState<Array<number | undefined>>(
+    new Array(questions.length).fill(undefined)
+  );
 
   const updateResponse = (i: number, value: number) => {
     console.log("Updating entry at", i, "with value", value);
@@ -30,7 +32,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
     setResponses([...responses]);
   };
 
-  const renderQuestion = (question: string, value: number, index: number) => {
+  const renderQuestion = (question: string, value: number | undefined, index: number) => {
     return (
       <div key={index}>
         <h5 className="title is-5" style={{color: "#DDDDDD"}}>
@@ -55,7 +57,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
       <br />
       <button
         className="button is-info"
-        onClick={() => onContinue({ questionStarted, responses, questionEnded: Date.now() / 1000 })}
+        onClick={() => onContinue({ questionStarted, responses: responses as Array<number>, questionEnded: Date.now() / 1000})}
       >
         Continue
       </button>

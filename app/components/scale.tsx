@@ -4,7 +4,7 @@ import { randomId, Range } from "../util";
 interface ScaleProps {
   min: number;
   max: number;
-  value: number;
+  value?: number;
   labels?: Array<string>;
   onChange: (value: number) => void;
 }
