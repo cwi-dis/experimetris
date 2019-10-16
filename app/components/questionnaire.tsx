@@ -57,6 +57,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
       <br />
       <button
         className="button is-info"
+        disabled={responses.some((r) => r === undefined)}
         onClick={() => onContinue({ questionStarted, responses: responses as Array<number>, questionEnded: Date.now() / 1000})}
       >
         Continue
