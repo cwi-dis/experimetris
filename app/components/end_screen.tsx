@@ -7,7 +7,7 @@ interface EndScreenProps {
 
 const EndScreen: React.FC<EndScreenProps> = (props) => {
   const { downloadableData, message } = props;
-  const data = "data:application/json;base64," + btoa(JSON.stringify(downloadableData));
+  const data = "data:application/json;base64," + btoa(JSON.stringify(downloadableData, null, " "));
 
   const participantId = downloadableData.find((entry) => entry.participantId);
   const filename = (participantId)
