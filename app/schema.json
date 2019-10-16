@@ -3,6 +3,13 @@
   "$id": "https://github.com/cwi-dis/tetris-study/blob/master/schema.json",
 
   "definitions": {
+    "participantid": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "participantId" }
+      }
+    },
+
     "embeddedvideo": {
       "type": "object",
       "properties": {
@@ -97,6 +104,7 @@
   "type": "array",
   "items": {
     "anyOf": [
+      { "$ref": "#/definitions/participantid" },
       { "$ref": "#/definitions/embeddedvideo" },
       { "$ref": "#/definitions/scale" },
       { "$ref": "#/definitions/questionnaire" },
