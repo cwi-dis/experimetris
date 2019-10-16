@@ -36,7 +36,7 @@
   },
   {
     "type": "tetris",
-    "difficulty": "normal",
+    "difficulty": 1000,
     "timeLimit": 10,
     "randomize": true,
     "id": "Normal difficulty and 10 seconds time limit"
