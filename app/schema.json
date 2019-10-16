@@ -7,7 +7,9 @@
       "type": "object",
       "properties": {
         "type": { "const": "participantId" }
-      }
+      },
+      "required": ["type"],
+      "additionalProperties": false
     },
 
     "embeddedvideo": {
@@ -35,7 +37,7 @@
         "randomize": { "type": "boolean" },
         "id": { "type": "string" }
       },
-      "required": ["type", "question", "min", "max"],
+      "required": ["type", "question", "min", "max", "labels"],
       "additionalProperties": false
     },
 
@@ -51,7 +53,7 @@
         "randomize": { "type": "boolean" },
         "id": { "type": "string" }
       },
-      "required": ["type", "questions"],
+      "required": ["type", "questions", "instructions", "min", "max", "labels"],
       "additionalProperties": false
     },
 
