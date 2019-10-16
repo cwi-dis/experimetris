@@ -5,12 +5,18 @@ import RatingScale from "./rating_scale";
 import EmbeddedVideo from "./embedded_video";
 import TetrisBoard, { TetrisDifficulty } from "./tetris_board";
 import Questionnaire from "./questionnaire";
+import ParticipantId from "./participant_id";
 
 export interface AdaptiveDifficultySettings {
   checkAfterNPieces: number;
   minRowsCompleted: number;
   maxRowsCompleted: number;
   difficultyDelta: number;
+}
+
+interface ParticipantIdStep {
+  type: "participantId";
+  id?: string;
 }
 
 interface TetrisStep {
@@ -48,7 +54,7 @@ interface QuestionnaireStep {
   id?: string;
 }
 
-export type ExperimentStep = TetrisStep | VideoStep | ScaleStep | QuestionnaireStep;
+export type ExperimentStep = ParticipantIdStep | TetrisStep | VideoStep | ScaleStep | QuestionnaireStep;
 
 interface ExperimentProps {
   steps: Array<ExperimentStep>;
@@ -81,6 +87,12 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
 
   if (currentStep) {
     switch (currentStep.type) {
+      case "participantId":
+        return (
+          <ParticipantId
+            onContinue={gotoNextStep}
+          />
+        );
       case "scale":
         return (
           <RatingScale
