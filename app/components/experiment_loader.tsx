@@ -24,7 +24,14 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
 
     reader.onload = (e: any) => {
       const content = e.target.result;
-      const experimentData: Array<any> = JSON.parse(content);
+      let experimentData: Array<any>;
+
+      try {
+        experimentData = JSON.parse(content);
+      } catch {
+        alert("The JSON data in the given file could not be parsed! Please make sure the file contains valid JSON");
+        return;
+      }
 
       const validator = new Ajv().compile(schema);
       const result = validator(experimentData);
