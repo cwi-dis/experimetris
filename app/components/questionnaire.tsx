@@ -53,9 +53,11 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
 
   return (
     <div className="questionnaire-container">
-      <h5 className="title is-5" style={{color: "#DDDDDD", padding: "20px 0 20px 0", borderBottom: "1px solid #DDDDDD"}}>
-        {instructions}
-      </h5>
+      <h5
+        className="title is-5"
+        style={{color: "#DDDDDD", padding: "20px 0 20px 0", borderBottom: "1px solid #DDDDDD"}}
+        dangerouslySetInnerHTML={{ __html: instructions }}
+      />
 
       {questions.map((q, i) => renderQuestion(q, responses[i], i))}
 
