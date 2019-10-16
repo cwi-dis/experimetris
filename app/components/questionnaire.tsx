@@ -10,6 +10,7 @@ interface QuestionnaireResult {
 }
 
 interface QuestionnaireProps {
+  instructions: string;
   questions: Array<string>;
   min: number;
   max: number;
@@ -18,7 +19,7 @@ interface QuestionnaireProps {
 }
 
 const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
-  const { questions, min, max, labels, onContinue } = props;
+  const { instructions, questions, min, max, labels, onContinue } = props;
 
   const [questionStarted] = useState<number>(Date.now() / 1000);
   const [responses, setResponses] = useState<Array<number | undefined>>(
@@ -35,9 +36,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
   const renderQuestion = (question: string, value: number | undefined, index: number) => {
     return (
       <div key={index}>
-        <h5 className="title is-5" style={{color: "#DDDDDD"}}>
+        <h6 className="title is-6" style={{color: "#DDDDDD"}}>
           {question}
-        </h5>
+        </h6>
 
         <Scale
           min={min}
@@ -52,6 +53,10 @@ const Questionnaire: React.FC<QuestionnaireProps> = (props) => {
 
   return (
     <div className="questionnaire-container">
+      <h5 className="title is-5" style={{color: "#DDDDDD", padding: "20px 0 20px 0", borderBottom: "1px solid #DDDDDD"}}>
+        {instructions}
+      </h5>
+
       {questions.map((q, i) => renderQuestion(q, responses[i], i))}
 
       <br />

@@ -37,6 +37,7 @@ interface ScaleStep {
 
 interface QuestionnaireStep {
   type: "questionnaire";
+  instructions: string;
   questions: Array<string>;
   min: number;
   max: number;
@@ -104,6 +105,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
       case "questionnaire":
         return (
           <Questionnaire
+            instructions={currentStep.instructions}
             questions={currentStep.questions}
             min={currentStep.min}
             max={currentStep.max}
