@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ParticipantIdResult {
   participantId: string;
@@ -12,6 +12,20 @@ interface ParticipantIdProps {
 const ParticipantId: React.FC<ParticipantIdProps> = (props) => {
   const { onContinue } = props;
   const [participantId, setParticipantId] = useState<string>("");
+
+  useEffect(() => {
+    const keyListener = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && participantId.length > 0) {
+        onContinue({ participantId });
+      }
+    };
+
+    document.addEventListener("keydown", keyListener);
+
+    return () => {
+      document.removeEventListener("keydown", keyListener);
+    };
+  });
 
   return (
     <div className="participantid">
