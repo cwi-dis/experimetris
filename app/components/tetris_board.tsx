@@ -62,14 +62,8 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
   const [timer, setTimer] = useState<number>(timeLimit || 0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    if (!canvasRef) {
-      return;
-    }
-
-    const canvas = canvasRef.current!;
+  const initGame = (canvas: HTMLCanvasElement) => {
     const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20]);
-
     const gameStarted = Date.now() / 1000;
     let timerExpired = false;
 
@@ -141,6 +135,17 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
         numRowsFilled: rowsFilled.length
       });
     });
+
+    return game;
+  };
+
+  useEffect(() => {
+    if (!canvasRef) {
+      return;
+    }
+
+    const canvas = canvasRef.current!;
+    const game = initGame(canvas);
 
     return () => {
       console.log("Unmounting component, unregistering listeners...");
