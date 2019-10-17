@@ -150,6 +150,7 @@ export default class Game extends EventEmitter {
             if (!this.restartable) {
               this.gameOver = true;
             } else {
+              this.emit("restarted");
               this.clearBoard();
             }
 
