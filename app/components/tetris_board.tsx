@@ -41,8 +41,9 @@ function formatTimer(time: number) {
 interface TetrisResult {
   gameStarted: number;
   gameEnded: number;
-  generatedPieces: Array<string>;
+  generatedPieces: Array<[string, number]>;
   rowsFilled: Array<number>;
+  restartedAt: Array<number>;
   numRowsFilled: number;
   gameEndedThrough: "timerExpired" | "gameOver";
   difficulty: TetrisDifficulty | number;
@@ -122,11 +123,11 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       setScore(rowsFilled);
     });
 
-    game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>, stoppedExternally: boolean) => {
+    game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<[string, number]>, restartedAt: Array<number>, stoppedExternally: boolean) => {
       console.log("Game ended with score:", rowsFilled.length);
 
       onContinue({
-        gameStarted, rowsFilled, generatedPieces, difficulty,
+        gameStarted, rowsFilled, generatedPieces, difficulty, restartedAt,
         gameEnded: Date.now() / 1000,
         gameEndedThrough: (stoppedExternally) ? "timerExpired" : "gameOver",
         numRowsFilled: rowsFilled.length
