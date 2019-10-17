@@ -65,7 +65,6 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
   const initGame = (canvas: HTMLCanvasElement) => {
     const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20]);
     const gameStarted = Date.now() / 1000;
-    let timerExpired = false;
 
     game.run();
 
@@ -80,8 +79,6 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
 
       setTimeout(() => {
         clearInterval(timerInterval);
-        timerExpired = true;
-
         game.stopGame();
       }, timeLimit * 1000);
     }
@@ -125,13 +122,13 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
       setScore(rowsFilled);
     });
 
-    game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>) => {
+    game.once("gameover", (rowsFilled: Array<number>, generatedPieces: Array<string>, stoppedExternally: boolean) => {
       console.log("Game ended with score:", rowsFilled.length);
 
       onContinue({
         gameStarted, rowsFilled, generatedPieces, difficulty,
         gameEnded: Date.now() / 1000,
-        gameEndedThrough: (timerExpired) ? "timerExpired" : "gameOver",
+        gameEndedThrough: (stoppedExternally) ? "timerExpired" : "gameOver",
         numRowsFilled: rowsFilled.length
       });
     });

@@ -19,6 +19,7 @@ export default class Game extends EventEmitter {
 
   private tickLength: number;
   private gameOver: boolean = false;
+  private stoppedExternally: boolean = false;
 
   private keyListener: (e: KeyboardEvent) => void;
 
@@ -79,6 +80,7 @@ export default class Game extends EventEmitter {
 
   public stopGame() {
     this.gameOver = true;
+    this.stoppedExternally = true;
   }
 
   public getTickLength() {
@@ -233,7 +235,11 @@ export default class Game extends EventEmitter {
         requestAnimationFrame(gameLoop);
       } else {
         console.log("requestAnimationFrame cancelled");
-        this.emit("gameover", this.rowsFilled, this.generatedPieces);
+
+        this.emit(
+          "gameover",
+          this.rowsFilled, this.generatedPieces, this.stoppedExternally
+        );
       }
     };
 
