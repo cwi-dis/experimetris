@@ -12,9 +12,11 @@ export default class Game extends EventEmitter {
 
   private ctx: CanvasRenderingContext2D;
   private board: string[][];
-  private rowsFilled: Array<number> = [];
 
+  private rowsFilled: Array<number> = [];
   private generatedPieces: Array<[string, number]> = [];
+  private restartedAt: Array<number> = [];
+
   private currentPiece?: Piece;
 
   private tickLength: number;
@@ -150,7 +152,9 @@ export default class Game extends EventEmitter {
             if (!this.restartable) {
               this.gameOver = true;
             } else {
+              this.restartedAt.push(Date.now() / 1000);
               this.emit("restarted");
+
               this.clearBoard();
             }
 
@@ -250,7 +254,8 @@ export default class Game extends EventEmitter {
 
         this.emit(
           "gameover",
-          this.rowsFilled, this.generatedPieces, this.stoppedExternally
+          this.rowsFilled, this.generatedPieces,
+          this.restartedAt, this.stoppedExternally
         );
       }
     };
