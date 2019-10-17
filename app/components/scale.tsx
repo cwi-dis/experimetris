@@ -22,11 +22,12 @@ const Scale: React.FC<ScaleProps> = (props) => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {Range(min, max + 1).map((n) => {
           return (
-            <div key={n}>
+            <div key={n} style={{ width: 20 }} onClick={onChange.bind(null, n)}>
               <input
                 type="radio"
                 id={`${baseId}-${n}`}
-                onChange={onChange.bind(null, n)}
+                style={{ display: "block", margin: "0 auto" }}
+                readOnly={true}
                 checked={value === n}
               />
               <div style={{ textAlign: "center", marginTop: 7 }}>
