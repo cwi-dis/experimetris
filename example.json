@@ -44,7 +44,8 @@
   {
     "type": "tetris",
     "difficulty": "normal",
-    "timeLimit": 15,
+    "timeLimit": 60,
+    "restartable": true,
     "randomize": true,
     "id": "Normal difficulty and 15 seconds time limit"
   },
