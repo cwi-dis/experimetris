@@ -24,6 +24,7 @@ interface TetrisStep {
   difficulty: TetrisDifficulty | number;
   timeLimit?: number;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
+  restartable?: boolean;
   id?: string;
 }
 
@@ -118,6 +119,7 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
             key={Math.random()}
             difficulty={currentStep.difficulty}
             timeLimit={currentStep.timeLimit}
+            restartable={currentStep.restartable}
             adaptiveDifficulty={currentStep.adaptiveDifficulty}
             onContinue={gotoNextStep}
           />

@@ -52,19 +52,20 @@ interface TetrisResult {
 interface TetrisBoardProps {
   difficulty: TetrisDifficulty | number;
   timeLimit?: number;
+  restartable?: boolean;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
   onContinue: (data: TetrisResult) => void;
 }
 
 const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
-  const { difficulty, adaptiveDifficulty, timeLimit, onContinue } = props;
+  const { difficulty, adaptiveDifficulty, timeLimit, restartable, onContinue } = props;
 
   const [score, setScore] = useState<number>(0);
   const [timer, setTimer] = useState<number>(timeLimit || 0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const initGame = (canvas: HTMLCanvasElement) => {
-    const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20]);
+    const game = new Game(canvas, mapDifficulty(difficulty), 30, [10, 20], restartable);
     const gameStarted = Date.now() / 1000;
 
     game.run();
