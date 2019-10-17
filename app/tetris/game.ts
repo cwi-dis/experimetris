@@ -18,17 +18,19 @@ export default class Game extends EventEmitter {
   private currentPiece?: Piece;
 
   private tickLength: number;
+  private restartable: boolean;
   private gameOver: boolean = false;
   private stoppedExternally: boolean = false;
 
   private keyListener: (e: KeyboardEvent) => void;
 
-  constructor(canvas: HTMLCanvasElement, tickLength = 200, squareSize = 20, dimensions: [number, number] = [10, 20]) {
+  constructor(canvas: HTMLCanvasElement, tickLength = 200, squareSize = 20, dimensions: [number, number] = [10, 20], restartable = false) {
     super();
 
     this.ctx = canvas.getContext("2d")!;
 
     this.tickLength = tickLength;
+    this.restartable = restartable;
     this.SQAURESIZE = squareSize;
     this.DIMENSIONS = dimensions;
 
@@ -145,7 +147,12 @@ export default class Game extends EventEmitter {
           const [boardX, boardY] = [x + position[0], y + position[1]];
 
           if (boardY < 0) {
-            this.gameOver = true;
+            if (!this.restartable) {
+              this.gameOver = true;
+            } else {
+              this.clearBoard();
+            }
+
             return;
           }
 
