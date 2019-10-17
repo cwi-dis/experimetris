@@ -32,8 +32,7 @@ export default class Game extends EventEmitter {
     this.SQAURESIZE = squareSize;
     this.DIMENSIONS = dimensions;
 
-    const [cols, rows] = this.DIMENSIONS;
-    this.board = Range(0, rows).map(() => new Array(cols).fill(EMPTY));
+    this.clearBoard();
 
     this.keyListener = (e) => {
       if (!this.currentPiece) {
@@ -56,6 +55,11 @@ export default class Game extends EventEmitter {
     };
 
     document.addEventListener("keydown", this.keyListener);
+  }
+
+  public clearBoard() {
+    const [cols, rows] = this.DIMENSIONS;
+    this.board = Range(0, rows).map(() => new Array(cols).fill(EMPTY));
   }
 
   public unregisterKeyListener() {
