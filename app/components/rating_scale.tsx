@@ -22,7 +22,7 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
   const defaultValue = Math.round((max - min) / 2 + min);
 
   const [questionStarted] = useState<number>(Date.now() / 1000);
-  const [value, setValue] = useState<number>(defaultValue);
+  const [value, setValue] = useState<number | undefined>(undefined);
 
   return (
     <div className="question-container">
@@ -41,7 +41,7 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
       <br />
       <button
         className="button is-info"
-        onClick={() => onContinue({ questionStarted, value, questionEnded: Date.now() / 1000 })}
+        onClick={() => onContinue({ questionStarted, value: value!, questionEnded: Date.now() / 1000 })}
       >
         Continue
       </button>
