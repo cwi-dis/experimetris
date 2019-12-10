@@ -13,6 +13,8 @@ const ADAPTIVE_DIFFICULTY_DEFAULT = {
   difficultyDelta: 10
 };
 
+const emsp = String.fromCharCode(0x02003);
+
 function mapDifficulty(difficulty: TetrisDifficulty | number): number {
   if (typeof difficulty === "number") {
     return difficulty;
@@ -60,7 +62,7 @@ interface TetrisBoardProps {
 }
 
 const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
-  const { difficulty, adaptiveDifficulty, timeLimit, restartable, onContinue } = props;
+  const { difficulty, adaptiveDifficulty, timeLimit, restartable, showTimer, showScore, onContinue } = props;
 
   const [score, setScore] = useState<number>(0);
   const [timer, setTimer] = useState<number>(timeLimit || 0);
@@ -157,8 +159,8 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
   return (
     <div style={{ overflowX: "hidden" }}>
       <div className="score">
-        {score * 10}
-        {(timeLimit)
+        {(showScore) ? score * 10 : emsp}
+        {(timeLimit && showTimer)
           ? <span style={{ color: (timer <= 10) ? "#B60E11" : "inherit"}}>
               {formatTimer(timer)}
             </span>
