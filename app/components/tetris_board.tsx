@@ -54,6 +54,8 @@ interface TetrisBoardProps {
   timeLimit?: number;
   restartable?: boolean;
   adaptiveDifficulty?: boolean | AdaptiveDifficultySettings;
+  showTimer?: boolean;
+  showScore?: boolean;
   onContinue: (data: TetrisResult) => void;
 }
 
