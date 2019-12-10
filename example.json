@@ -32,6 +32,7 @@
       "difficultyDelta": 10
     },
     "randomize": true,
+    "showScore": true,
     "id": "No time limit and adaptive difficulty"
   },
   {
@@ -39,7 +40,8 @@
     "difficulty": 1000,
     "timeLimit": 10,
     "randomize": true,
-    "id": "Normal difficulty and 10 seconds time limit"
+    "showTimer": true,
+    "id": "Really slow game and 10 seconds time limit"
   },
   {
     "type": "tetris",

@@ -85,6 +85,8 @@
         },
         "restartable": { "type": "boolean" },
         "randomize": { "type": "boolean" },
+        "showScore": { "type": "boolean" },
+        "showTimer": { "type": "boolean" },
         "id": { "type": "string" }
       },
       "required": ["type", "difficulty"],
