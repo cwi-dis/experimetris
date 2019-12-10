@@ -41,6 +41,7 @@ const RatingScale: React.FC<RatingScaleProps> = (props) => {
       <br />
       <button
         className="button is-info"
+        disabled={value === undefined}
         onClick={() => onContinue({ questionStarted, value: value!, questionEnded: Date.now() / 1000 })}
       >
         Continue
