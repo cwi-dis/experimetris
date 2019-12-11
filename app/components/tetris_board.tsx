@@ -13,8 +13,6 @@ const ADAPTIVE_DIFFICULTY_DEFAULT = {
   difficultyDelta: 10
 };
 
-const emsp = String.fromCharCode(0x02003);
-
 function mapDifficulty(difficulty: TetrisDifficulty | number): number {
   if (typeof difficulty === "number") {
     return difficulty;
@@ -156,10 +154,14 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     };
   }, []);
 
-  return (
-    <div style={{ overflowX: "hidden" }}>
+  const renderScore = () => {
+    if (!showTimer && !showScore) {
+      return null;
+    }
+
+    return (
       <div className="score">
-        {(showScore) ? score * 10 : emsp}
+        {(showScore) ? score * 10 : null}
         {(timeLimit && showTimer)
           ? <span style={{ color: (timer <= 10) ? "#B60E11" : "inherit"}}>
               {formatTimer(timer)}
@@ -167,7 +169,12 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
           : null
         }
       </div>
+    );
+  };
 
+  return (
+    <div className="tetris-container">
+      {renderScore()}
       <canvas
         className="tetris-canvas"
         width={300}
