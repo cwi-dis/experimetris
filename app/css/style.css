@@ -59,10 +59,9 @@ html, body {
 
 .score {
   width: 100%;
-  margin-top: 5vh;
-
   text-align: center;
   font-size: 36pt;
+  margin-bottom: 40px;
 }
 
 .score span {
@@ -71,8 +70,17 @@ html, body {
   display: block;
 }
 
+.tetris-container {
+  height: calc(100vh - var(--titlebar-height));
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .tetris-canvas {
-  margin: 40px calc(50vw - 150px);
+  margin: 0 calc(50vw - 150px);
   border: 1px solid #555555;
 }
 
