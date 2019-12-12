@@ -62,12 +62,14 @@ html, body {
   text-align: center;
   font-size: 36pt;
   margin-bottom: 40px;
+  line-height: 1;
 }
 
 .score span {
   color: #555555;
   font-size: 24pt;
   display: block;
+  margin-top: 15px;
 }
 
 .tetris-container {
