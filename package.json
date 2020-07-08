@@ -28,7 +28,7 @@
     "@types/yt-player": "^3.4.0",
     "classnames": "^2.2.6",
     "css-loader": "^2.1.1",
-    "electron": "^6.0.6",
+    "electron": "^7.2.4",
     "electron-builder": "^21.2.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
