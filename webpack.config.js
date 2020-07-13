@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 
-module.exports = {
+const rendererTarget = {
   entry: "./app/main.ts",
   mode: "development",
   target: "web",
@@ -27,3 +27,30 @@ module.exports = {
     ]
   }
 };
+
+const mainProcessTarget = {
+  entry: "./main.ts",
+  mode: "development",
+  target: "electron-main",
+  output: {
+    path: __dirname + "/js",
+    filename: "main.js"
+  },
+  devtool: "source-map",
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader"
+      }
+    ]
+  },
+  node: {
+    __dirname: false
+  }
+};
+
+module.exports = [ rendererTarget, mainProcessTarget ];

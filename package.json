@@ -3,12 +3,12 @@
   "productName": "Experimetris",
   "version": "1.9.4",
   "description": "An Electron application to run cognitive load studies using a version of Tetris",
-  "main": "main.js",
+  "main": "js/main.js",
   "repository": "https://github.com/troeggla/experimetris",
   "author": "Thomas Röggla",
   "license": "BSD-2-Clause",
   "scripts": {
-    "start": "electron main.js",
+    "start": "electron js/main.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder && cd dist/mac && tar cvf Experimetris.tar Experimetris.app/ && gzip Experimetris.tar",
     "lint": "eslint --ext=ts,tsx,js,jsx ."
