@@ -5,8 +5,8 @@ const rendererTarget = {
   mode: "development",
   target: "web",
   output: {
-    path: __dirname + "/js",
-    filename: "bundle.js"
+    path: __dirname + "/bundle",
+    filename: "renderer.js"
   },
   devtool: "source-map",
   resolve: {
@@ -33,7 +33,7 @@ const mainProcessTarget = {
   mode: "development",
   target: "electron-main",
   output: {
-    path: __dirname + "/js",
+    path: __dirname + "/bundle",
     filename: "main.js"
   },
   devtool: "source-map",
