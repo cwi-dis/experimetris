@@ -1,15 +1,11 @@
-const electron = require("electron");
-// Module to control application life.
-const { app, Menu } = electron;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
+import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
 
-const path = require("path");
-const url = require("url");
+import * as path from "path";
+import * as url from "url";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow: BrowserWindow | null;
 
 function createWindow () {
   // Create the browser window.
@@ -22,7 +18,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, "index.html"),
+    pathname: path.join(__dirname, "../index.html"),
     protocol: "file:",
     slashes: true
   }));
@@ -30,35 +26,35 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  let menuTemplate = [{
+  let menuTemplate: Array<MenuItemConstructorOptions> = [{
     label: "View",
     submenu: [
-      {role: "reload"},
-      {role: "forcereload"},
-      {role: "toggledevtools"},
-      {type: "separator"},
-      {role: "resetzoom"},
-      {role: "zoomin"},
-      {role: "zoomout"},
-      {type: "separator"},
-      {role: "togglefullscreen"}
-    ]
+      { role: "reload" },
+      { role: "forcereload" },
+      { role: "toggledevtools" },
+      { type: "separator" },
+      { role: "resetzoom" },
+      { role: "zoomin" },
+      { role: "zoomout" },
+      { type: "separator" },
+      { role: "togglefullscreen" }
+    ] as Array<MenuItemConstructorOptions>
   }];
 
   if (process.platform === "darwin") {
     menuTemplate.unshift({
       label: app.name,
       submenu: [
-        {role: "about"},
-        {type: "separator"},
-        {role: "services", submenu: []},
-        {type: "separator"},
-        {role: "hide"},
-        {role: "hideothers"},
-        {role: "unhide"},
-        {type: "separator"},
-        {role: "quit"}
-      ]
+        { role: "about" },
+        { type: "separator" },
+        { role: "services", submenu: [] },
+        { type: "separator" },
+        { role: "hide" },
+        { role: "hideothers" },
+        { role: "unhide" },
+        { type: "separator" },
+        { role: "quit" }
+      ] as Array<MenuItemConstructorOptions>
     });
   }
 
@@ -91,6 +87,3 @@ app.on("activate", function () {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
