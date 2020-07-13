@@ -29,7 +29,7 @@ const rendererTarget = {
 };
 
 const mainProcessTarget = {
-  entry: "./main.ts",
+  entry: "./main/main.ts",
   mode: "development",
   target: "electron-main",
   output: {
