@@ -90,57 +90,57 @@ const Experiment: React.FC<ExperimentProps> = (props) => {
 
   if (currentStep) {
     switch (currentStep.type) {
-      case "participantId":
-        return (
-          <ParticipantId
-            onContinue={gotoNextStep}
-          />
-        );
-      case "scale":
-        return (
-          <RatingScale
-            question={currentStep.question}
-            min={currentStep.min}
-            max={currentStep.max}
-            labels={currentStep.labels}
-            onContinue={gotoNextStep}
-          />
-        );
-      case "video":
-        return (
-          <EmbeddedVideo
-            videoId={currentStep.videoId}
-            autoplay={currentStep.autoplay}
-            stopAfter={currentStep.stopAfter}
-            onContinue={gotoNextStep}
-          />
-        );
-      case "tetris":
-        return (
-          <TetrisBoard
-            key={Math.random()}
-            difficulty={currentStep.difficulty}
-            timeLimit={currentStep.timeLimit}
-            restartable={currentStep.restartable}
-            adaptiveDifficulty={currentStep.adaptiveDifficulty}
-            showScore={currentStep.showScore}
-            showTimer={currentStep.showTimer}
-            onContinue={gotoNextStep}
-          />
-        );
-      case "questionnaire":
-        return (
-          <Questionnaire
-            instructions={currentStep.instructions}
-            questions={currentStep.questions}
-            min={currentStep.min}
-            max={currentStep.max}
-            labels={currentStep.labels}
-            onContinue={gotoNextStep}
-          />
-        );
-      default:
-        return null;
+    case "participantId":
+      return (
+        <ParticipantId
+          onContinue={gotoNextStep}
+        />
+      );
+    case "scale":
+      return (
+        <RatingScale
+          question={currentStep.question}
+          min={currentStep.min}
+          max={currentStep.max}
+          labels={currentStep.labels}
+          onContinue={gotoNextStep}
+        />
+      );
+    case "video":
+      return (
+        <EmbeddedVideo
+          videoId={currentStep.videoId}
+          autoplay={currentStep.autoplay}
+          stopAfter={currentStep.stopAfter}
+          onContinue={gotoNextStep}
+        />
+      );
+    case "tetris":
+      return (
+        <TetrisBoard
+          key={Math.random()}
+          difficulty={currentStep.difficulty}
+          timeLimit={currentStep.timeLimit}
+          restartable={currentStep.restartable}
+          adaptiveDifficulty={currentStep.adaptiveDifficulty}
+          showScore={currentStep.showScore}
+          showTimer={currentStep.showTimer}
+          onContinue={gotoNextStep}
+        />
+      );
+    case "questionnaire":
+      return (
+        <Questionnaire
+          instructions={currentStep.instructions}
+          questions={currentStep.questions}
+          min={currentStep.min}
+          max={currentStep.max}
+          labels={currentStep.labels}
+          onContinue={gotoNextStep}
+        />
+      );
+    default:
+      return null;
     }
   }
 

@@ -44,17 +44,17 @@ export default class Game extends EventEmitter {
       }
 
       switch (e.key) {
-        case "ArrowLeft":
-          this.currentPiece.moveLeft();
-          break;
-        case "ArrowUp":
-          this.currentPiece.rotate();
-          break;
-        case "ArrowRight":
-          this.currentPiece.moveRight();
-          break;
-        case "ArrowDown":
-          this.currentPiece.moveDown();
+      case "ArrowLeft":
+        this.currentPiece.moveLeft();
+        break;
+      case "ArrowUp":
+        this.currentPiece.rotate();
+        break;
+      case "ArrowRight":
+        this.currentPiece.moveRight();
+        break;
+      case "ArrowDown":
+        this.currentPiece.moveDown();
       }
     };
 

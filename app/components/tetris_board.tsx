@@ -19,15 +19,15 @@ function mapDifficulty(difficulty: TetrisDifficulty | number): number {
   }
 
   switch (difficulty) {
-    case "easy":
-      return 500;
-    case "hard":
-      return 100;
-    case "insane":
-      return 50;
-    case "normal":
-    default:
-      return 200;
+  case "easy":
+    return 500;
+  case "hard":
+    return 100;
+  case "insane":
+    return 50;
+  case "normal":
+  default:
+    return 200;
   }
 }
 
@@ -162,11 +162,13 @@ const TetrisBoard: React.FC<TetrisBoardProps> = (props) => {
     return (
       <div className="score">
         {(showScore) ? score * 10 : null}
-        {(timeLimit && showTimer)
-          ? <span style={{ color: (timer <= 10) ? "#B60E11" : "inherit"}}>
-              {formatTimer(timer)}
-            </span>
-          : null
+        {(timeLimit && showTimer) ? (
+          <span style={{ color: (timer <= 10) ? "#B60E11" : "inherit"}}>
+            {formatTimer(timer)}
+          </span>
+        ) : (
+          null
+        )
         }
       </div>
     );
