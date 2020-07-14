@@ -8,6 +8,7 @@
   "author": "Thomas Röggla",
   "license": "BSD-2-Clause",
   "scripts": {
+    "build": "webpack",
     "start": "electron bundle/main.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder && cd dist/mac && tar cvf Experimetris.tar Experimetris.app/ && gzip Experimetris.tar",
