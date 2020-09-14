@@ -15,9 +15,16 @@
     "lint": "eslint --ext=ts,tsx,js,jsx ."
   },
   "build": {
-    "appId": "nl.cwi.dis.tetris-study",
+    "appId": "nl.cwi.dis.experimetris",
+    "productName": "Experimetris",
+    "artifactName": "Experimetris.${ext}",
+    "publish": null,
     "mac": {
-      "target": "dir"
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Utility"
     },
     "win": {
       "target": "portable"
