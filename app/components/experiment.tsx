@@ -64,7 +64,7 @@ interface ExperimentProps {
   closeSession: (data: Array<any>) => void;
 }
 
-let collectedData: Array<any> = [];
+const collectedData: Array<any> = [];
 
 const Experiment: React.FC<ExperimentProps> = (props) => {
   const [steps, setSteps] = useState<Array<ExperimentStep>>(props.steps);

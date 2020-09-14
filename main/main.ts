@@ -26,7 +26,7 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  let menuTemplate: Array<MenuItemConstructorOptions> = [{
+  const menuTemplate: Array<MenuItemConstructorOptions> = [{
     label: "View",
     submenu: [
       { role: "reload" },
