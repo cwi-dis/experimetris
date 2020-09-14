@@ -1,0 +1,156 @@
+name: Build application for all platforms and publish release
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  build_linux:
+    name: Build executable for Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Compile bundle
+        run: yarn run webpack
+
+      - name: Build executable
+        run: yarn run electron-builder
+
+      - name: Publish executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: Experimetris.AppImage
+          path: dist/Experimetris.AppImage
+
+  build_mac:
+    name: Build executable for macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Compile bundle
+        run: yarn run webpack
+
+      - name: Build executable
+        run: yarn run electron-builder
+
+      - name: Publish executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: Experimetris.dmg
+          path: dist/Experimetris.dmg
+
+  build_win:
+    name: Build executable for Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install packages
+        run: yarn install
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Compile bundle
+        run: yarn run webpack
+
+      - name: Build executable
+        run: yarn run electron-builder
+
+      - name: Publish executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: Experimetris.exe
+          path: dist/Experimetris.exe
+
+  create_and_publish_release:
+    name: Create release and upload assets
+    needs: [ build_linux, build_mac, build_win ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Version ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Download Linux build
+        uses: actions/download-artifact@v2
+        with:
+          name: Experimetris.AppImage
+          path: .
+
+      - name: Download macOS build
+        uses: actions/download-artifact@v2
+        with:
+          name: Experimetris.dmg
+          path: .
+
+      - name: Download Windows build
+        uses: actions/download-artifact@v2
+        with:
+          name: Experimetris.exe
+          path: .
+
+      - name: Publish Linux build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Experimetris.AppImage
+          asset_name: Experimetris.AppImage
+          asset_content_type: application/octet-stream
+
+      - name: Publish macOS build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Experimetris.dmg
+          asset_name: Experimetris.dmg
+          asset_content_type: application/octet-stream
+
+      - name: Publish Windows build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Experimetris.exe
+          asset_name: Experimetris.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+
+  delete_created_artifacts:
+    name: Delete created artifacts
+    needs: [ create_and_publish_release ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete build artificats
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            Experimetris.AppImage
+            Experimetris.dmg
+            Experimetris.exe
