@@ -7,6 +7,7 @@ module.exports = {
   "ignorePatterns": [
     "bin/",
     "dist/",
+    "bundle/",
     "docs/",
     "js/",
     "node_modules/",
