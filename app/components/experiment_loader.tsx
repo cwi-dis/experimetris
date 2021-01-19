@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import * as classNames from "classnames";
-import * as Ajv from "ajv";
+import Ajv from "ajv";
 
 import { ExperimentStep } from "./experiment";
 import { shuffle } from "../util";
