@@ -1,7 +1,7 @@
 {
   "name": "experimetris",
   "productName": "Experimetris",
-  "version": "1.9.7",
+  "version": "1.9.8",
   "description": "An Electron application to run cognitive load studies using a version of Tetris",
   "main": "bundle/main.js",
   "repository": "https://github.com/troeggla/experimetris",
