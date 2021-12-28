@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import * as classNames from "classnames";
+import classnames from "classnames";
 import Ajv from "ajv";
 
 import { ExperimentStep } from "./experiment";
@@ -65,7 +65,7 @@ const ExperimentLoader: React.FC<ExperimentLoaderProps> = (props) => {
   return (
     <div>
       <div
-        className={classNames("dropzone", { "dropzone-entered": dropzoneEntered })}
+        className={classnames("dropzone", { "dropzone-entered": dropzoneEntered })}
         onDragEnter={() => setDropzoneEntered(true)}
         onDragLeave={() => setDropzoneEntered(false)}
         onDragOver={(e) => e.preventDefault()}
