@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import classnames from "classnames";
+import * as classnames from "classnames";
 import Ajv from "ajv";
 
 import { ExperimentStep } from "./experiment";
